@@ -1,0 +1,94 @@
+nav {
+  background-color: #262626;
+  font-weight: bold;
+  transition: all .2s linear;
+  min-width: 245px;
+  z-index: 1000;
+  height: 100%;
+}
+
+nav * {
+  transition: all .2s linear;
+}
+
+nav .dropdown-menu {
+position: relative !important;
+transform: none !important;
+padding: 0 !important;
+border: none;
+background-color: transparent;
+width: 100%;
+}
+
+nav .rotate-45 {
+  transform: rotate(45deg);
+}
+nav .icon {
+  min-width: 30px;
+  display: inline-block;
+  text-align: center;
+}
+
+nav a.dropdown-item, nav a.nav-link {
+  color: #FFF;
+  padding: 1rem 2rem 1rem .5rem;
+  opacity: .8;
+}
+
+nav a.dropdown-item:hover, nav a.nav-link:hover {
+  opacity: 1;
+  background-color: #1B1B1B;
+}
+
+nav > .nav-item:not(:last-child), nav > .nav-link:not(:last-child) {
+  border-bottom: 1px solid #404040;
+}
+
+nav a.dropdown-item {
+  padding: .8rem 2rem ;
+  font-size: .9rem;
+}
+
+@media (max-width: 767.98px) {
+  /* nav {
+      position: absolute;
+      left: -250px;
+      z-index: 1000;
+      bottom: 0;
+      top: 0;
+  } */
+
+  /* nav.show {
+      left: 0;
+  } */
+
+  nav {
+      visibility: hidden;
+      opacity: 0;
+      min-width: 0;
+      width: 0;
+  }
+
+  nav.show {
+      visibility: visible;
+      opacity: 1;
+      min-width: 245px;
+      width: 245px;
+  }
+}
+
+.esquerdo-inferior {
+  position:absolute;
+  float: left;
+  margin-bottom: 0;
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  /* background-color: white; */
+  font-size: 11px;
+  min-width: 210px;
+  color: lightgray;
+}
