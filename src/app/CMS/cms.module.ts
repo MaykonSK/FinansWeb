@@ -6,6 +6,7 @@ import { HomeComponent } from './Home/Home.component';
 import { FooterComponent } from './Footer/Footer.component';
 import { HeaderComponent } from './Header/Header.component';
 import { IndexComponent } from './Index/Index.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -18,7 +19,9 @@ import { IndexComponent } from './Index/Index.component';
   imports: [
     CommonModule,
     CMSRoutingModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CMSModule { }

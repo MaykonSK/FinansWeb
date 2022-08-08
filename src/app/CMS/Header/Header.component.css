@@ -14,10 +14,11 @@ nav * {
 nav .dropdown-menu {
 position: relative !important;
 transform: none !important;
-padding: 0 !important;
+padding-left: 10px !important;
 border: none;
 background-color: transparent;
 width: 100%;
+margin-top: -10px;
 }
 
 nav .rotate-45 {
@@ -47,34 +48,6 @@ nav > .nav-item:not(:last-child), nav > .nav-link:not(:last-child) {
 nav a.dropdown-item {
   padding: .8rem 2rem ;
   font-size: .9rem;
-}
-
-@media (max-width: 767.98px) {
-  /* nav {
-      position: absolute;
-      left: -250px;
-      z-index: 1000;
-      bottom: 0;
-      top: 0;
-  } */
-
-  /* nav.show {
-      left: 0;
-  } */
-
-  nav {
-      visibility: hidden;
-      opacity: 0;
-      min-width: 0;
-      width: 0;
-  }
-
-  nav.show {
-      visibility: visible;
-      opacity: 1;
-      min-width: 245px;
-      width: 245px;
-  }
 }
 
 .esquerdo-inferior {

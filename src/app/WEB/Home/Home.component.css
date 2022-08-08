@@ -1,0 +1,28 @@
+.opcoes {
+  display: flex;
+  margin-bottom: 8px;
+}
+.img-check {
+  width: 30px;
+}
+.centralizar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.botao-cor {
+  background-color: palevioletred;
+  color: white;
+}
+.jumbotron {
+  background-color: #7173f7;
+  color: white;
+}
+h5 {
+  font-weight: bold;
+  font-size: 1.25rem;
+  font-family: 'PT Sans',sans-serif;
+  margin: 0px;
+  text-justify: distribute;
+  text-transform: uppercase;
+}

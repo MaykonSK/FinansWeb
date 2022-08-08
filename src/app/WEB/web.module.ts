@@ -6,19 +6,29 @@ import { FooterComponent } from './Footer/Footer.component';
 import { HeaderComponent } from './Header/Header.component';
 import { IndexComponent } from './Index/Index.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginUsuarioComponent } from './Conta/LoginUsuario/LoginUsuario.component';
+import { CadastroUsuarioComponent } from './Conta/CadastroUsuario/CadastroUsuario.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoadingComponent } from './Shared/Loading/Loading.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     FooterComponent,
     HeaderComponent,
-    IndexComponent
+    IndexComponent,
+    LoginUsuarioComponent,
+    CadastroUsuarioComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
     WEBRoutingModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ]
 })
 export class WEBModule { }

@@ -1,0 +1,35 @@
+<section>
+  <div class="row mt-4">
+    <div class="col-6">
+      <h2>Os seus dados estão seguros com o certificado SSL</h2>
+      <img src="assets/Imagens/Cadastro/Cadastro.jpg" class="img-fluid">
+    </div>
+    <div class="col-6">
+      <h1>Registre-se</h1>
+      <form [formGroup]="cadastro">
+        <div class="form-group">
+          <label for="exampleInputName">Nome <strong class="text-danger">*</strong></label>
+          <input type="email" class="form-control" id="exampleInputName" placeholder="Ex: João da Silva" formControlName="Username">
+          <small class="form-text text-danger" *ngIf="cadastro.get('Username')?.touched && cadastro.get('Username')?.errors">Nome necessário</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">E-mail <strong class="text-danger">*</strong></label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: joao@dominio.com" formControlName="Email">
+          <small class="form-text text-danger" *ngIf="cadastro.get('Email')?.touched && cadastro.get('Email')?.errors">E-mail inválido</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Senha <strong class="text-danger">*</strong></label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="******" formControlName="Password">
+          <small class="form-text text-danger" *ngIf="cadastro.get('Password')?.touched && cadastro.get('Password')?.errors">Senha necessária</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword2">Confirmação senha <strong class="text-danger">*</strong></label>
+          <input type="password" class="form-control" id="exampleInputPassword2" placeholder="******" formControlName="RePassword">
+          <small class="form-text text-danger" *ngIf="cadastro.get('RePassword')?.touched && cadastro.get('RePassword')?.errors">Confirmação de senha necessário</small>
+        </div>
+        <button (click)="CadastrarUsuario()" class="btn btn-primary w-100" [disabled]="cadastro.invalid">Cadastrar</button>
+        <app-Loading [Loading]="Loading"></app-Loading>
+      </form>
+    </div>
+  </div>
+</section>

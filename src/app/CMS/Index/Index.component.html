@@ -1,8 +1,15 @@
 <mat-sidenav-container>
-  <mat-sidenav opened>
+  <mat-sidenav mode="side" [(opened)]="opened"> <!--mode="push" / empuura container /  mode="over" sobreponhe o container / mode="side" -->
     <app-Header></app-Header>
   </mat-sidenav>
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+    <div class="botaoMenu">
+      <button class="btn btn-dark m-2" (click)="opened=!opened">Menu</button>
+    </div>
+
+    <main class="container borda">
+      <router-outlet></router-outlet>
+    </main>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
