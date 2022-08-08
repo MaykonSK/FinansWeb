@@ -15,7 +15,8 @@
           <label for="exampleInputPassword1">Senha</label>
           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="******" formControlName="Password">
         </div>
-        <button type="submit" class="btn btn-primary w-100" [disabled]="login.invalid">Login</button>
+        <button type="submit" class="btn btn-primary w-100" [disabled]="login.invalid" (click)="LogarUsuario()">Login</button>
+        <app-Loading [Loading]="Loading"></app-Loading>
       </form>
     </div>
   </div>
