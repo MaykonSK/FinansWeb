@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 
 @Component({
   selector: 'app-Home',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private usuario: UsuarioService) {
+  }
 
   ngOnInit() {
+    this.teste();
   }
+
+  teste() {
+    var teste = this.usuario.estaLogado
+    console.log(teste)
+  }
+
+
 
 }

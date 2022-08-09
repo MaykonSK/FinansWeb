@@ -1,5 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TokenService } from 'src/app/Autenticacao/token.service';
 import { WebService } from '../../web.service';
 
 @Component({
@@ -11,7 +13,9 @@ export class LoginUsuarioComponent implements OnInit {
 
   @Output() Loading: boolean = false;
 
-  constructor(private fb: FormBuilder, private service: WebService) {}
+  private Token: string = "";
+
+  constructor(private fb: FormBuilder, private service: WebService, private tokenService: TokenService, private router: Router) {}
 
   ngOnInit() {
   }
@@ -25,8 +29,13 @@ export class LoginUsuarioComponent implements OnInit {
     if (this.login.valid) {
       this.Loading = true;
       const dados = this.login.getRawValue();
-      this.service.logarUsuario(dados).subscribe(user => {
-        console.log(user);
+      this.service.logarUsuario(dados).subscribe(token => {
+
+        var tokenFormatado = JSON.parse(JSON.stringify(token)).message.split(' ')[0]
+        this.tokenService.salvaToken(tokenFormatado)
+        console.log(this.tokenService.retornaToken());
+        this.router.navigate(["cms"])
+
         this.Loading = false;
       }, error => {
         this.Loading = false;
