@@ -4,7 +4,7 @@
     <h2 class="navbar-brand">Finans</h2>
   </div>
 
-  <a class="nav-link" [routerLink]="['cms']">
+  <a class="nav-link" routerLink="/cms">
     <div class="icon">
       <i class="fa fa-home"></i>
     </div>
@@ -21,10 +21,10 @@
     <div class="dropdown-menu">
       <span>
         <span>
-          <a class="dropdown-item" [routerLink]="['/patrimonio/imoveis']" routerLinkActive="text-black" [routerLinkActiveOptions]="{exact: true}" >Imoveis</a>
+          <a class="dropdown-item" routerLink="/patrimonio/imoveis" routerLinkActive="text-black" [routerLinkActiveOptions]="{exact: true}" >Imoveis</a>
         </span>
         <span>
-          <a class="dropdown-item" [routerLink]="['/patrimonio/veiculos']" routerLinkActive="text-black" [routerLinkActiveOptions]="{exact: true}" >Veiculos</a>
+          <a class="dropdown-item" routerLink="/patrimonio/veiculos" routerLinkActive="text-black" [routerLinkActiveOptions]="{exact: true}" >Veiculos</a>
         </span>
       </span>
     </div>
