@@ -11,6 +11,7 @@ import { LoginUsuarioComponent } from './Conta/LoginUsuario/LoginUsuario.compone
 import { CadastroUsuarioComponent } from './Conta/CadastroUsuario/CadastroUsuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingComponent } from './Shared/Loading/Loading.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LoadingComponent } from './Shared/Loading/Loading.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgbModule
   ]
 })
 export class WEBModule { }

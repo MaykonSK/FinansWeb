@@ -8,6 +8,10 @@ import { HeaderComponent } from './Header/Header.component';
 import { IndexComponent } from './Index/Index.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon'
+import { HttpClientModule } from '@angular/common/http';
+import { ImoveisComponent } from './Patrimonios/Imoveis/Imoveis.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './Shared/modal/modal.component';
 
 
 @NgModule({
@@ -15,7 +19,9 @@ import {MatIconModule} from '@angular/material/icon'
     HomeComponent,
     FooterComponent,
     HeaderComponent,
-    IndexComponent
+    IndexComponent,
+    ImoveisComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +29,9 @@ import {MatIconModule} from '@angular/material/icon'
     MatSidenavModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule,
+    NgbModule
   ]
 })
 export class CMSModule { }

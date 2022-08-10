@@ -1,3 +1,134 @@
-<p>
-  Imoveis works!
-</p>
+<section>
+  <h2 class="text-center mt-2 mb-4 text-primary">Imóveis</h2>
+</section>
+
+<section class="mt-4 mb-4">
+  <div class="text-right">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Cadastrar</button>
+  </div>
+</section>
+
+<section>
+  <table class="table table-bordered table-dark mt-2">
+    <thead>
+      <tr>
+        <th scope="col" class="">
+          #1
+        </th>
+        <th scope="col" class="">
+          R. Rio Grande do Norte, 1519
+        </th>
+        <th scope="col" class="text-center">
+          Casa
+        </th>
+        <th scope="col" class="">
+          Uberaba
+        </th>
+        <th scope="col" class="text-right">
+          <button class="btn btn-warning mr-2">Editar</button>
+          <button class="btn btn-danger ">Excluir</button>
+        </th>
+      </tr>
+    </thead>
+  </table>
+
+  <table class="table table-bordered table-dark mt-2">
+    <thead>
+      <tr>
+        <th scope="col"  class="">
+          #1
+        </th>
+        <th scope="col" class="">
+          R. Joao canaan, 431
+        </th>
+        <th scope="col" class="text-center">
+          Apartamento
+        </th>
+        <th scope="col" class="">
+          Miguelopolis
+        </th>
+        <th scope="col" class="text-right">
+          <button class="btn btn-warning mr-2">Editar</button>
+          <button class="btn btn-danger ">Excluir</button>
+        </th>
+      </tr>
+    </thead>
+  </table>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Cadastrar Imóvel</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form" [formGroup]="cadastro" >
+          <div class="row">
+            <div class="form-group col-6">
+              <label for="cep">Cep <strong class="text-danger">*</strong></label>
+              <input type="text" class="form-control mb-2" id="cep" (keyup)="localizarCep()" placeholder="Ex: 38050000" >
+            </div>
+            <div class="form-group col-6" >
+              <label for="rua">Rua <strong class="text-danger">*</strong></label>
+              <input type="text" class="form-control mb-2" id="rua" formControlName="logradouro">
+              <small class="text-danger">{{mensagem}}</small>
+            </div>
+            <div class="form-group col-6" >
+              <label for="numeroCasa">Número</label>
+              <input type="text" class="form-control mb-2" id="numeroCasa" formControlName="numeroCasa">
+            </div>
+            <div class="form-group col-6" >
+              <label for="bairro">Bairro<strong class="text-danger">*</strong></label>
+              <input type="text" class="form-control mb-2" id="bairro" formControlName="bairro">
+              <small class="text-danger">{{mensagem}}</small>
+            </div>
+            <div class="form-group col-6">
+              <label for="estado">Estado <strong class="text-danger">*</strong></label>
+              <input type="text" class="form-control mb-2" id="estado" formControlName="uf">
+            </div>
+            <div class="form-group col-6">
+              <label for="municipio">Município <strong class="text-danger">*</strong></label>
+              <input type="text" class="form-control mb-2" id="municipio" formControlName="localidade">
+            </div>
+          </div>
+          <button [disabled]="cadastro.invalid" (click)="cadastrarImovel()" class="btn btn-success w-100 mb-2">Cadastrar</button>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+  Launch
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        Body
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

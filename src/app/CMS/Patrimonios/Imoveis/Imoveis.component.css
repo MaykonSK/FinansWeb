@@ -1,0 +1,15 @@
+.table {
+  cursor: pointer;
+  table-layout:fixed;
+}
+.table thead th {
+  vertical-align: middle;
+  max-width: 25ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.table:hover {
+  opacity: 0.9;
+}
+

@@ -8,7 +8,8 @@
     <div class="icon">
       <mat-icon aria-hidden="false">home</mat-icon>
     </div>
-    Home
+    <div class="centralizar">Home</div>
+
   </a>
 
   <div class="nav-item drop-down">
@@ -16,7 +17,8 @@
       <div class="icon">
         <mat-icon aria-hidden="false">maps_home_work</mat-icon>
       </div>
-      Meu Patrimonio
+      <div class="centralizar">Meu Patrimonio</div>
+
     </a>
     <div class="dropdown-menu">
       <span>
@@ -35,27 +37,28 @@
     <div class="icon">
       <mat-icon aria-hidden="false">account_circle</mat-icon>
     </div>
-    Perfil
+    <div class="centralizar">Conta</div>
+
   </a>
 
   <a class="nav-link" [routerLink]="['/politica-privacidade']">
     <div class="icon">
       <mat-icon aria-hidden="false">policy</mat-icon>
     </div>
-    Política de Privacidade
+    <div class="centralizar">Política de Privacidade</div>
   </a>
 
   <a class="nav-link" [routerLink]="['/fale-conosco']">
     <div class="icon">
       <mat-icon aria-hidden="false">connect_without_contact</mat-icon>
     </div>
-    Fale Conosco
+    <div class="centralizar">Fale Conosco</div>
   </a>
 
   <a class="nav-link" type="button" [routerLink]="['']" (click)="logout()">
     <div class="icon">
       <mat-icon aria-hidden="false">logout</mat-icon>
     </div>
-    Logout
+    <div class="centralizar">Logout</div>
   </a>
 </nav>

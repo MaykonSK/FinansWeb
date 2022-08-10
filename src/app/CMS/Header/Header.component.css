@@ -26,14 +26,18 @@ nav .rotate-45 {
 }
 nav .icon {
   min-width: 30px;
-  display: inline-block;
-  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 nav a.dropdown-item, nav a.nav-link {
   color: #FFF;
   padding: 1rem 2rem 1rem .5rem;
   opacity: .8;
+  display: flex;
+}
+.dropdown-toggle {
+  align-items: center;
 }
 
 nav a.dropdown-item:hover, nav a.nav-link:hover {
@@ -64,4 +68,8 @@ nav a.dropdown-item {
   font-size: 11px;
   min-width: 210px;
   color: lightgray;
+}
+.centralizar {
+  display: flex;
+  align-items: center;
 }

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  opened: boolean = false;
+  opened: boolean = true;
 
   constructor() { }
 
