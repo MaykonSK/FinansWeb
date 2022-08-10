@@ -6,7 +6,7 @@
 
   <a class="nav-link" routerLink="/cms">
     <div class="icon">
-      <i class="fa fa-home"></i>
+      <mat-icon aria-hidden="false">home</mat-icon>
     </div>
     Home
   </a>
@@ -14,7 +14,7 @@
   <div class="nav-item drop-down">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       <div class="icon">
-        <i class="fa fa-newspaper"></i>
+        <mat-icon aria-hidden="false">maps_home_work</mat-icon>
       </div>
       Meu Patrimonio
     </a>
@@ -33,28 +33,28 @@
 
   <a class="nav-link">
     <div class="icon">
-      <i class="fa fa-user"></i>
+      <mat-icon aria-hidden="false">account_circle</mat-icon>
     </div>
     Perfil
   </a>
 
   <a class="nav-link" [routerLink]="['/politica-privacidade']">
     <div class="icon">
-      <i class="fa fa-lock"></i>
+      <mat-icon aria-hidden="false">policy</mat-icon>
     </div>
     Política de Privacidade
   </a>
 
   <a class="nav-link" [routerLink]="['/fale-conosco']">
     <div class="icon">
-      <i class="fa fa-phone"></i>
+      <mat-icon aria-hidden="false">connect_without_contact</mat-icon>
     </div>
     Fale Conosco
   </a>
 
   <a class="nav-link" type="button" [routerLink]="['']" (click)="logout()">
     <div class="icon">
-      <i class="fa fa-phone"></i>
+      <mat-icon aria-hidden="false">logout</mat-icon>
     </div>
     Logout
   </a>

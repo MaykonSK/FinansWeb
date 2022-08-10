@@ -7,6 +7,7 @@ import { FooterComponent } from './Footer/Footer.component';
 import { HeaderComponent } from './Header/Header.component';
 import { IndexComponent } from './Index/Index.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon'
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CMSRoutingModule,
     MatSidenavModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ]
 })
 export class CMSModule { }

@@ -4,13 +4,20 @@ mat-sidenav-container {
   background-color: white;
   color: black;
 }
-mat-sidenav-content {
-  padding: 16px;
-  border: 1px solid red;
-}
 .botaoMenu {
   position: fixed;
 }
-.borda {
-  border: 1px solid red;
+.iconeMenu {
+  font-size: 50px;
+  height: 50px ;
+  width: 50px;
+  cursor: pointer;
+  color: rgb(15, 56, 131);
+}
+.iconeMenu:hover {
+  transform: rotate(270deg); /* Equal to rotateZ(45deg) */
+  color: rgb(54, 78, 122);
+}
+.container {
+  padding-left: 100px;
 }

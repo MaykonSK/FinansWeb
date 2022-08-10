@@ -6,8 +6,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" routerLink="">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" routerLink="/login">Login</a>
-      <a class="nav-item nav-link" routerLink="/cadastro">Cadastro</a>
+      <a class="nav-item nav-link" routerLink="/login" *ngIf="logado == false">Login</a>
+      <a class="nav-item nav-link" routerLink="/cadastro" *ngIf="logado == false">Cadastro</a>
+      <a class="nav-item nav-link" routerLink="/cms" *ngIf="logado == true">CMS</a>
     </div>
   </div>
 </nav>

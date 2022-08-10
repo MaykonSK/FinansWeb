@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/Autenticacao/Usuario/Usuario';
 import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 
 @Component({
@@ -8,18 +9,19 @@ import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 })
 export class HomeComponent implements OnInit {
 
+  public infoUsuario!: Usuario;
+
   constructor(private usuario: UsuarioService) {
   }
 
   ngOnInit() {
-    this.teste();
+    this.recuperarUsuario();
   }
 
-  teste() {
-    var teste = this.usuario.estaLogado
-    console.log(teste)
+  recuperarUsuario() {
+    this.usuario.retornaUsuario().subscribe(user => {
+      this.infoUsuario = user;
+    })
   }
-
-
 
 }

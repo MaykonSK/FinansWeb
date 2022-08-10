@@ -11,8 +11,8 @@ const routes: Routes = [
     path: "", component: IndexComponent,
     children: [
       {path: "", component: HomeComponent},
-      {path: "login", component: LoginUsuarioComponent},
-      {path: "cadastro", component: CadastroUsuarioComponent}
+      {path: "login", component: LoginUsuarioComponent, canActivate: [LoginGuard]},
+      {path: "cadastro", component: CadastroUsuarioComponent, canActivate: [LoginGuard]}
     ]
   }
 ];
