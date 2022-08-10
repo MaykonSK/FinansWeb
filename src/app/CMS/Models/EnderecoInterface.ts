@@ -1,7 +1,6 @@
-export interface EnderecoInterface {
-  cep: string;
-  logradouro: string;
-  bairro: string
-  localidade: string
-  uf: string;
+export class EnderecoInterface {
+  logradouro: string = ""
+  bairro: string = ""
+  localidade: string = ""
+  uf: string = ""
 }

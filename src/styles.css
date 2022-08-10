@@ -2,3 +2,14 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* isso resolve o bug do modal não clicavel. Obs: esse bug acontece quando o modal está dentro
+de um componente com posicao fixa ou relativa. Conflito com o mate-side angular */
+.modal-backdrop {
+  /* desativa o fundo escuro */
+  display: none;
+}
+.modal {
+  /* simula fundo escuro */
+  background: rgba(0,0,0,0.5);
+}

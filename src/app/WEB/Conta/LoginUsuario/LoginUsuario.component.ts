@@ -20,6 +20,7 @@ export class LoginUsuarioComponent implements OnInit {
   constructor(private fb: FormBuilder, private service: WebService, private tokenService: TokenService, private router: Router) {}
 
   ngOnInit() {
+    this.login;
   }
 
   login = this.fb.group({

@@ -10,8 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon'
 import { HttpClientModule } from '@angular/common/http';
 import { ImoveisComponent } from './Patrimonios/Imoveis/Imoveis.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './Shared/modal/modal.component';
+import { VeiculosComponent } from './Patrimonios/Veiculos/Veiculos.component';
 
 
 @NgModule({
@@ -21,6 +21,7 @@ import { ModalComponent } from './Shared/modal/modal.component';
     HeaderComponent,
     IndexComponent,
     ImoveisComponent,
+    VeiculosComponent,
     ModalComponent
   ],
   imports: [
@@ -31,7 +32,6 @@ import { ModalComponent } from './Shared/modal/modal.component';
     ReactiveFormsModule,
     MatIconModule,
     HttpClientModule,
-    NgbModule
   ]
 })
 export class CMSModule { }

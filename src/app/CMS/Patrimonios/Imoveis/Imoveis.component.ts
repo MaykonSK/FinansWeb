@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CmsService } from '../../cms.service';
 import { EnderecoInterface } from '../../Models/EnderecoInterface';
 import {MatDialog} from '@angular/material/dialog';
@@ -11,24 +11,28 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class ImoveisComponent implements OnInit {
 
-  mensagem: string = "";
+  public mensagem: string;
+  public endereco: EnderecoInterface;
 
-  endereco!: EnderecoInterface;
+  cadastro: FormGroup;
 
-  constructor(private service: CmsService, private fb: FormBuilder, public dialog: MatDialog) {
+  constructor(private service: CmsService, private fb: FormBuilder) {
   }
 
   ngOnInit() {
+    this.configurarFormulario();
   }
 
-  cadastro = this.fb.group({
-    cep: [null, Validators.required],
-    logradouro: [{value: null, disabled: true}, Validators.required],
-    bairro: [{value: null, disabled: true}, Validators.required],
-    numeroCasa: [null],
-    uf: [{value: null, disabled: true}, Validators.required],
-    localidade: [{value: null, disabled: true}, Validators.required]
-  })
+  configurarFormulario() {
+    this.cadastro = this.fb.group({
+      cep: [null, Validators.required],
+      logradouro: [null, Validators.required],
+      bairro: [null, Validators.required],
+      numeroCasa: [null, Validators.required],
+      uf: [null, Validators.required],
+      localidade: [null, Validators.required]
+    })
+  }
 
   recuperarImoveis() {
     this.service.recuperarImoveis().subscribe(imovel => {
@@ -37,25 +41,29 @@ export class ImoveisComponent implements OnInit {
   }
 
   localizarCep() {
-      const cep = this.cadastro.get("cep")
+    if (this.cadastro.valid) {
+      const cep = this.cadastro.value.cep
       console.log(cep);
-
-      // return this.service.getCep(cep).subscribe(dados => {
-      //   this.endereco = dados;
-      //   this.cadastro.patchValue({logradouro: this.endereco.logradouro}) //atualizar o valor do value, que é nulo
-      //   this.cadastro.patchValue({uf: this.endereco.uf})
-      //   this.cadastro.patchValue({localidade: this.endereco.localidade})
-      //   this.cadastro.patchValue({bairro: this.endereco.bairro})
-      //   if (!this.endereco.logradouro.length || !this.endereco.bairro.length)  { //se for nulo
-      //     this.cadastro.get('logradouro').enable(); //ativar input
-      //     this.mensagem = 'Não foi possivel encontrar o campo. Por favor, insira acima.'
-      //   } else {
-      //     this.cadastro.get('logradouro').disable();//desativar input
-      //     this.mensagem = ''
-      //   }
-      // }, error => {
-      //   //console.log('Cep não encontrado!\n'+error)
-      // })
+      this.service.getCep(cep).subscribe(dados => {
+        this.endereco = dados;
+        console.log(this.endereco)
+        this.cadastro.patchValue({
+          logradouro: this.endereco.logradouro,
+          uf: this.endereco.uf,
+          localidade: this.endereco.localidade,
+          bairro: this.endereco.bairro
+        })
+        if (!this.endereco.logradouro.length || !this.endereco.bairro.length)  {
+          this.cadastro.value.logradouro.enable(); //ativar input
+          this.mensagem = 'Não foi possivel encontrar o campo. Por favor, insira acima.'
+        } else {
+          this.cadastro.value.logradouro.disable();//desativar input
+          this.mensagem = ''
+        }
+      }, error => {
+        //console.log('Cep não encontrado!\n'+error)
+      })
+    }
   }
 
   cadastrarImovel() {
