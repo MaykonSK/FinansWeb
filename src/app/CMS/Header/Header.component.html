@@ -17,7 +17,7 @@
       <div class="icon">
         <mat-icon aria-hidden="false">maps_home_work</mat-icon>
       </div>
-      <div class="centralizar">Meu Patrimonio</div>
+      <div class="centralizar">Meu Patrimônio</div>
     </a>
     <div class="dropdown-menu">
       <span>
@@ -31,6 +31,24 @@
     </div>
   </div>
 
+  <div class="nav-item drop-down">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      <div class="icon">
+        <mat-icon aria-hidden="false">receipt_long</mat-icon>
+      </div>
+      <div class="centralizar">Contas</div>
+    </a>
+    <div class="dropdown-menu">
+      <span>
+        <span>
+          <a class="dropdown-item" routerLink="/contas/pagar" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >A pagar</a>
+        </span>
+        <span>
+          <a class="dropdown-item" routerLink="/contas/receber" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >A receber</a>
+        </span>
+      </span>
+    </div>
+  </div>
 
   <a class="nav-link">
     <div class="icon">

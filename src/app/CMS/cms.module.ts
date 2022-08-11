@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ImoveisComponent } from './Patrimonios/Imoveis/Imoveis.component';
 import { ModalComponent } from './Shared/modal/modal.component';
 import { VeiculosComponent } from './Patrimonios/Veiculos/Veiculos.component';
+import { ContasPagarComponent } from './Financeiro/ContasPagar/ContasPagar.component';
+import { ContasReceberComponent } from './Financeiro/ContasReceber/ContasReceber.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { VeiculosComponent } from './Patrimonios/Veiculos/Veiculos.component';
     IndexComponent,
     ImoveisComponent,
     VeiculosComponent,
-    ModalComponent
+    ModalComponent,
+    ContasPagarComponent,
+    ContasReceberComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 <section>
-  <h2 class="text-center mt-2 mb-4 text-primary">Imóveis</h2>
+  <h2 class="text-center mt-2 mb-4 text-primary">{{title}}</h2>
 </section>
 
 <section class="mt-4 mb-4">
@@ -16,13 +16,16 @@
           #
         </th>
         <th scope="col" class="">
-          Endereço
+          Descrição
         </th>
         <th scope="col" class="text-center">
-          Tipo
+          Valor
         </th>
         <th scope="col" class="">
-          Cidade
+          Vencimento
+        </th>
+        <th scope="col" class="">
+          Tipo
         </th>
         <th scope="col" class="text-right">
 
@@ -35,13 +38,16 @@
           #1
         </td>
         <td scope="col" class="">
-          R. Rio Grande do Norte, 1519
+          Energia
         </td>
         <td scope="col" class="text-center">
-          Casa
+          80
         </td>
         <td scope="col" class="">
-          Uberaba
+          15/05/2022
+        </td>
+        <td scope="col" class="">
+          Única
         </td>
         <td scope="col" class="text-right">
           <button class="btn btn-warning mr-2">Editar</button>
@@ -53,13 +59,16 @@
           #2
         </td>
         <td scope="col" class="">
-          Av. Cunha Silva, 541
+          Internet
         </td>
         <td scope="col" class="text-center">
-          Apartamento
+          99
         </td>
         <td scope="col" class="">
-          São Paulo
+          20/05/2022
+        </td>
+        <td scope="col" class="">
+          Recorrente
         </td>
         <td scope="col" class="text-right">
           <button class="btn btn-warning mr-2">Editar</button>
@@ -74,42 +83,35 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">Cadastrar Imóvel</h3>
+        <h3 class="modal-title" id="exampleModalLabel">Cadastrar Conta</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form class="form" [formGroup]="cadastro" >
+        <form class="form" >
           <div class="row">
             <div class="form-group col-6">
-              <label for="cep">Cep <strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="cep" placeholder="Ex: 38050000" formControlName="cep" (keyup)="localizarCep()">
+              <label for="descricao">Descrição <strong class="text-danger"></strong></label>
+              <input type="text" class="form-control mb-2" id="descricao" placeholder="Ex: 38050000" formControlName="Descricao">
             </div>
             <div class="form-group col-6" >
-              <label for="rua">Rua <strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="rua" formControlName="logradouro">
-              <small class="text-danger">{{mensagem}}</small>
+              <label for="valor">Valor <strong class="text-danger">*</strong></label>
+              <input type="text" class="form-control mb-2" id="valor" formControlName="Valor">
             </div>
             <div class="form-group col-6" >
-              <label for="numeroCasa">Número</label>
-              <input type="text" class="form-control mb-2" id="numeroCasa" formControlName="numeroCasa">
+              <label for="vencimento">Vencimento</label>
+              <input type="text" class="form-control mb-2" id="vencimento" formControlName="Vencimento">
             </div>
-            <div class="form-group col-6" >
-              <label for="bairro">Bairro<strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="bairro" formControlName="bairro">
-              <small class="text-danger">{{mensagem}}</small>
-            </div>
-            <div class="form-group col-6">
-              <label for="estado">Estado <strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="estado" formControlName="uf">
-            </div>
-            <div class="form-group col-6">
-              <label for="municipio">Município <strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="municipio" formControlName="localidade">
+            <div class="form-check form-switch col-6">
+              <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked formControlName="Tipo" >
+              <label class="btn btn-outline-success" for="success-outlined">Conta única</label>
+
+              <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" formControlName="Tipo">
+              <label class="btn btn-outline-success" for="danger-outlined">Conta recorrente</label>
             </div>
           </div>
-          <button [disabled]="cadastro.invalid" (click)="cadastrarImovel()" class="btn btn-success w-100 mb-2">Cadastrar</button>
+          <button class="btn btn-success w-100 mb-2">Cadastrar</button>
       </form>
       </div>
       <div class="modal-footer">
