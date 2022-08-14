@@ -73,3 +73,6 @@ nav a.dropdown-item {
   display: flex;
   align-items: center;
 }
+.navbar-brand {
+  font-size: 1.5em;
+}

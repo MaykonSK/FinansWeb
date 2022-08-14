@@ -1,15 +1,24 @@
-<mat-sidenav-container>
-  <mat-sidenav mode="side" [(opened)]="opened"> <!--mode="push" / empuura container /  mode="over" sobreponhe o container / mode="side" -->
-    <app-Header></app-Header>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="">
-      <mat-icon class="iconeMenu" (click)="opened=!opened">first_page</mat-icon>
-    </div>
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="example-toolbar" [ngClass]="{'disabled' : !mobileQuery.matches}">
+    <button mat-icon-button (click)="opened=!opened"><mat-icon>menu</mat-icon></button>
+    <h1 class="example-app-name">Finans</h1>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav [(opened)]="opened" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56"> <!--mode="push" / empuura container /  mode="over" sobreponhe o container / mode="side" -->
+      <app-Header></app-Header>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div [ngClass]="{'disabled' : mobileQuery.matches}">
+        <mat-icon *ngIf="!opened" class="iconeMenu" (click)="opened=!opened">menu</mat-icon>
+        <mat-icon *ngIf="opened" class="iconeMenu" (click)="opened=!opened">menu_open</mat-icon>
+      </div>
 
-    <main class="container">
-      <router-outlet></router-outlet>
-    </main>
+      <main class="container" [style.marginTop.px]="mobileQuery.matches ? 30 : 0">
+        <router-outlet></router-outlet>
+      </main>
 
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+

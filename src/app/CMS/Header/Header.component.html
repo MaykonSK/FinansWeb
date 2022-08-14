@@ -4,7 +4,7 @@
     <h2 class="navbar-brand">Finans</h2>
   </div>
 
-  <a class="nav-link" routerLink="/cms">
+  <a class="nav-link" [routerLink]="['cms']">
     <div class="icon">
       <mat-icon aria-hidden="false">home</mat-icon>
     </div>
@@ -22,10 +22,10 @@
     <div class="dropdown-menu">
       <span>
         <span>
-          <a class="dropdown-item" routerLink="/patrimonio/imoveis" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >Imoveis</a>
+          <a class="dropdown-item" [routerLink]="['/patrimonio/imoveis']" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >Imoveis</a>
         </span>
         <span>
-          <a class="dropdown-item" routerLink="/patrimonio/veiculos" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >Veiculos</a>
+          <a class="dropdown-item" [routerLink]="['/patrimonio/veiculos']" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >Veiculos</a>
         </span>
       </span>
     </div>
@@ -41,10 +41,10 @@
     <div class="dropdown-menu">
       <span>
         <span>
-          <a class="dropdown-item" routerLink="/contas/pagar" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >A pagar</a>
+          <a class="dropdown-item" [routerLink]="['/contas/pagar']" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >A pagar</a>
         </span>
         <span>
-          <a class="dropdown-item" routerLink="/contas/receber" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >A receber</a>
+          <a class="dropdown-item" [routerLink]="['/contas/receber']" routerLinkActive="text-white" [routerLinkActiveOptions]="{exact: true}" >A receber</a>
         </span>
       </span>
     </div>

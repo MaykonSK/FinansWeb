@@ -9,7 +9,7 @@ import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 })
 export class HomeComponent implements OnInit {
 
-  public infoUsuario!: Usuario;
+  public infoUsuario: Usuario;
 
   constructor(private usuario: UsuarioService) {
   }

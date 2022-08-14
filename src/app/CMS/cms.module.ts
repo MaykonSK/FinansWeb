@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { CMSRoutingModule } from './cms-routing.module';
+import { MatButtonModule } from '@angular/material/button';
 import { HomeComponent } from './Home/Home.component';
 import { FooterComponent } from './Footer/Footer.component';
 import { HeaderComponent } from './Header/Header.component';
@@ -14,6 +16,9 @@ import { ModalComponent } from './Shared/modal/modal.component';
 import { VeiculosComponent } from './Patrimonios/Veiculos/Veiculos.component';
 import { ContasPagarComponent } from './Financeiro/ContasPagar/ContasPagar.component';
 import { ContasReceberComponent } from './Financeiro/ContasReceber/ContasReceber.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { AlertErrorComponent } from './Shared/AlertError/AlertError.component';
+import { AlertSuccessComponent } from './Shared/AlertSuccess/AlertSuccess.component';
 
 
 @NgModule({
@@ -26,16 +31,21 @@ import { ContasReceberComponent } from './Financeiro/ContasReceber/ContasReceber
     VeiculosComponent,
     ModalComponent,
     ContasPagarComponent,
-    ContasReceberComponent
+    ContasReceberComponent,
+    AlertErrorComponent,
+    AlertSuccessComponent,
   ],
   imports: [
     CommonModule,
     CMSRoutingModule,
     MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
     HttpClientModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class CMSModule { }

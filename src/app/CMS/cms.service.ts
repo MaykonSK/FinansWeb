@@ -25,4 +25,8 @@ export class CmsService {
     return this.http.get(APICEP+"/" + cep + "/json");
   }
 
+  cadastrarContaPagar(conta: any): Observable<any> {
+    return this.http.get(API+"/contaspagar", conta)
+  }
+
 }
