@@ -7,8 +7,15 @@
     <button type="button" class="btn btn-warning mr-2">Calculadora</button>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Cadastrar</button>
   </div>
-  <app-AlertSuccess [mensagem]="mensagemSuccess">{{mensagemSuccess}}</app-AlertSuccess>
+  <app-AlertSuccess class="mt-2" [mensagem]="mensagemSuccess">{{mensagemSuccess}}</app-AlertSuccess>
 </section>
+
+<section>
+  <h3>Total em contas</h3>
+  <h4>R${{total}}</h4>
+</section>
+
+<button (click)="somarContas()">Somar</button>
 
 <section>
   <table class="table mt-2">
@@ -27,7 +34,7 @@
           Vencimento
         </th>
         <th scope="col" class="">
-          Tipo
+          Recorrente
         </th>
         <th scope="col" class="text-right">
 
@@ -35,46 +42,28 @@
       </tr>
     </thead>
     <tbody class="table-dark">
-      <tr>
+      <tr *ngFor="let item of contas">
         <td scope="col" class="">
           #1
         </td>
         <td scope="col" class="">
-          Energia
+          {{item.descricao}}
         </td>
         <td scope="col" class="text-center">
-          80
+          {{item.valor}}
         </td>
         <td scope="col" class="">
-          15/05/2022
+          {{item.vencimento}}
         </td>
-        <td scope="col" class="">
-          Única
+        <td scope="col" *ngIf="item.recorrente == true">
+          Sim
+        </td>
+        <td scope="col" *ngIf="item.recorrente == false">
+          Não
         </td>
         <td scope="col" class="text-right">
           <button class="btn btn-warning mr-2">Editar</button>
-          <button class="btn btn-danger ">Excluir</button>
-        </td>
-      </tr>
-      <tr>
-        <td scope="col" class="">
-          #2
-        </td>
-        <td scope="col" class="">
-          Internet
-        </td>
-        <td scope="col" class="text-center">
-          99
-        </td>
-        <td scope="col" class="">
-          20/05/2022
-        </td>
-        <td scope="col" class="">
-          Recorrente
-        </td>
-        <td scope="col" class="text-right">
-          <button class="btn btn-warning mr-2">Editar</button>
-          <button class="btn btn-danger ">Excluir</button>
+          <button class="btn btn-danger" (click)="deletarConta(item.id)">Excluir</button>
         </td>
       </tr>
     </tbody>
@@ -105,13 +94,17 @@
               <label for="vencimento">Vencimento</label>
               <input type="date" class="form-control mb-2" id="vencimento" formControlName="Vencimento">
             </div>
+            <div class="form-check form-switch col-6">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" formControlName="Recorrente" >
+              <label class="form-check-label" for="flexSwitchCheckDefault">Recorrente</label>
+            </div>
           </div>
           <button class="btn btn-success w-100 mb-2" [disabled]="cadastro.invalid" (click)="cadastrarConta()">Cadastrar</button>
           <app-AlertError [mensagem]="mensagemError" >{{mensagemError}}</app-AlertError>
       </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeBtn>Fechar</button>
       </div>
     </div>
   </div>
