@@ -19,6 +19,7 @@ import { ContasReceberComponent } from './Financeiro/ContasReceber/ContasReceber
 import { NgxMaskModule } from 'ngx-mask';
 import { AlertErrorComponent } from './Shared/AlertError/AlertError.component';
 import { AlertSuccessComponent } from './Shared/AlertSuccess/AlertSuccess.component';
+import { LoadComponent } from './Shared/Load/Load.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { AlertSuccessComponent } from './Shared/AlertSuccess/AlertSuccess.compon
     ContasReceberComponent,
     AlertErrorComponent,
     AlertSuccessComponent,
+    LoadComponent
   ],
   imports: [
     CommonModule,

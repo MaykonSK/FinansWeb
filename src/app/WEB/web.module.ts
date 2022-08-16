@@ -12,6 +12,7 @@ import { CadastroUsuarioComponent } from './Conta/CadastroUsuario/CadastroUsuari
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingComponent } from './Shared/Loading/Loading.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     WEBRoutingModule,
     MatSidenavModule,
+    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

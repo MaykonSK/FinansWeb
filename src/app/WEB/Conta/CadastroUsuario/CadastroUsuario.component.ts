@@ -13,6 +13,8 @@ export class CadastroUsuarioComponent implements OnInit {
 
   @Output() Loading: boolean = false;
 
+  mensagem: string = ""
+
   ngOnInit() {
     this.cadastro
   }
@@ -32,6 +34,7 @@ export class CadastroUsuarioComponent implements OnInit {
         console.log(user)
         this.Loading = false;
       }, error => {
+        this.mensagem = "Dados inválido para cadastro"
         this.Loading = false;
       })
     }

@@ -1,4 +1,5 @@
 <section>
+  <app-Loading [Loading]="Loading"></app-Loading>
   <div class="row mt-4">
     <div class="col-6">
       <img src="assets/Imagens/Cadastro/Login.jpg" class="img-fluid">
@@ -16,7 +17,6 @@
           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="******" formControlName="Password">
         </div>
         <button type="submit" class="btn btn-primary w-100" [disabled]="login.invalid" (click)="LogarUsuario()">Login</button>
-        <app-Loading [Loading]="Loading"></app-Loading>
         <p class="text-danger mt-2" *ngIf="mensagem.length">{{mensagem}}</p>
       </form>
     </div>

@@ -1,4 +1,5 @@
 <section>
+  <app-Loading [Loading]="Loading"></app-Loading>
   <div class="row mt-4">
     <div class="col-6">
       <h2>Os seus dados estão seguros com o certificado SSL</h2>
@@ -28,7 +29,7 @@
           <small class="form-text text-danger" *ngIf="cadastro.get('RePassword')?.touched && cadastro.get('RePassword')?.errors">Confirmação de senha necessário</small>
         </div>
         <button (click)="CadastrarUsuario()" class="btn btn-primary w-100" [disabled]="cadastro.invalid">Cadastrar</button>
-        <app-Loading [Loading]="Loading"></app-Loading>
+
       </form>
     </div>
   </div>
