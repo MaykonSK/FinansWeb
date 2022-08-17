@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TokenService } from '../Autenticacao/token.service';
 import { ContaPagar } from './Models/ContaPagar';
 import { GetContasPagar } from './Models/GetContasPagar';
 
@@ -13,7 +14,7 @@ const APICEP = "https://viacep.com.br/ws";
 })
 export class CmsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private tokenService: TokenService) { }
 
   recuperarImoveis(): Observable<any> {
     return this.http.get(API+"/imovel");

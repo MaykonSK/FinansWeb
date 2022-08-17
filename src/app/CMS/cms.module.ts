@@ -10,7 +10,7 @@ import { HeaderComponent } from './Header/Header.component';
 import { IndexComponent } from './Index/Index.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ImoveisComponent } from './Patrimonios/Imoveis/Imoveis.component';
 import { ModalComponent } from './Shared/modal/modal.component';
 import { VeiculosComponent } from './Patrimonios/Veiculos/Veiculos.component';
@@ -20,6 +20,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { AlertErrorComponent } from './Shared/AlertError/AlertError.component';
 import { AlertSuccessComponent } from './Shared/AlertSuccess/AlertSuccess.component';
 import { LoadComponent } from './Shared/Load/Load.component';
+import { AutenticacaoInterceptor } from '../Autenticacao/autenticacao.interceptor';
 
 
 @NgModule({
@@ -48,6 +49,13 @@ import { LoadComponent } from './Shared/Load/Load.component';
     MatIconModule,
     HttpClientModule,
     NgxMaskModule.forRoot()
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AutenticacaoInterceptor,
+      multi: true,
+    }
   ]
 })
 export class CMSModule { }
