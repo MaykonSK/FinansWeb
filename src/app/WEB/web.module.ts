@@ -13,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoadingComponent } from './Shared/Loading/Loading.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatIconModule } from '@angular/material/icon';
+import { MsgErrorComponent } from './Shared/MsgError/MsgError.component';
+import { MsgSuccessComponent } from './Shared/MsgSuccess/MsgSuccess.component';
+import { RedefinirSenhaComponent } from './Conta/Redefinir-senha/Redefinir-senha.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { MatIconModule } from '@angular/material/icon';
     IndexComponent,
     LoginUsuarioComponent,
     CadastroUsuarioComponent,
-    LoadingComponent
+    LoadingComponent,
+    MsgErrorComponent,
+    MsgSuccessComponent,
+    RedefinirSenhaComponent
   ],
   imports: [
     CommonModule,

@@ -13,7 +13,8 @@ export class CadastroUsuarioComponent implements OnInit {
 
   @Output() Loading: boolean = false;
 
-  mensagem: string = ""
+  mensagemError: string = "";
+  mensagemSuccess: string = "";
 
   ngOnInit() {
     this.cadastro
@@ -31,10 +32,10 @@ export class CadastroUsuarioComponent implements OnInit {
       this.Loading = true;
       const novoUsuario = this.cadastro.getRawValue(); //getRawValue() recupera todos os dados do formulario cadastro
       this.service.cadastrarUsuario(novoUsuario).subscribe(user => {
-        console.log(user)
+        this.mensagemSuccess = user;
         this.Loading = false;
       }, error => {
-        this.mensagem = "Dados inválido para cadastro"
+        this.mensagemError = error.error.message
         this.Loading = false;
       })
     }

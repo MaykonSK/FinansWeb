@@ -20,6 +20,10 @@ export class WebService {
     return this.http.post(API+"/login", usuario);
   }
 
+  redefinirSenha(dados: any): Observable<any> {
+    return this.http.post(API+"/redefinir-senha", dados)
+  }
+
 }
 
 

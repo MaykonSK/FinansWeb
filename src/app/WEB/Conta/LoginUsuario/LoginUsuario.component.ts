@@ -33,12 +33,9 @@ export class LoginUsuarioComponent implements OnInit {
       this.Loading = true;
       const dados = this.login.getRawValue();
       this.service.logarUsuario(dados).subscribe(token => {
-
         var tokenFormatado = JSON.parse(JSON.stringify(token)).message.split(' ')[0]
         this.tokenService.salvaToken(tokenFormatado)
-        console.log(this.tokenService.retornaToken());
         this.router.navigate(["cms"])
-
         this.Loading = false;
       }, error => {
         this.Loading = false;

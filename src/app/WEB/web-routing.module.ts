@@ -4,6 +4,7 @@ import { LoginGuard } from '../Autenticacao/login.guard';
 import { HomeComponent } from '../WEB/Home/Home.component';
 import { CadastroUsuarioComponent } from './Conta/CadastroUsuario/CadastroUsuario.component';
 import { LoginUsuarioComponent } from './Conta/LoginUsuario/LoginUsuario.component';
+import { RedefinirSenhaComponent } from './Conta/Redefinir-senha/Redefinir-senha.component';
 import { IndexComponent } from './Index/Index.component';
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
     children: [
       {path: "", component: HomeComponent},
       {path: "login", component: LoginUsuarioComponent, canActivate: [LoginGuard]},
-      {path: "cadastro", component: CadastroUsuarioComponent, canActivate: [LoginGuard]}
+      {path: "cadastro", component: CadastroUsuarioComponent, canActivate: [LoginGuard]},
+      {path: "redefinir-senha", component: RedefinirSenhaComponent, canActivate: [LoginGuard]}
     ]
   }
 ];
