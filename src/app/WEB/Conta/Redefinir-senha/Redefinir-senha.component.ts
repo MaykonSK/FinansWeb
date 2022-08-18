@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/Autenticacao/token.service';
 import { NovaSenha } from '../../Models/NovaSenha';
 import { WebService } from '../../web.service';
@@ -14,24 +14,41 @@ export class RedefinirSenhaComponent implements OnInit {
 
   @Output() Loading: boolean = false;
 
-  public mensagem: string = ""
+  public mensagemError: string = ""
+  public mensagemSuccess: string = ""
   novasenha: NovaSenha;
 
-  constructor(private fb: FormBuilder, private service: WebService, private tokenService: TokenService, private router: Router) { }
+  private token: any;
 
-  formulario = this.fb.group({
-    Email: [null, [Validators.required, Validators.email]],
-    Password: [null, Validators.required],
-    RePassword: [null, Validators.required]
-  })
+  formulario: FormGroup;
+
+  constructor(private fb: FormBuilder, private service: WebService, private tokenService: TokenService, private router: Router, private route: ActivatedRoute) { }
+
+  configurarFormulario() {
+    this.formulario = this.fb.group({
+      Email: [null, [Validators.required, Validators.email]],
+      Password: [null, Validators.required],
+      RePassword: [null, Validators.required]
+    })
+  }
+
 
   ngOnInit() {
+    this.configurarFormulario();
+    this.token = this.route.snapshot.queryParamMap.get("token");
+    console.log("token: "+this.token);
+
   }
 
   redefinirSenha() {
     const dados = this.formulario.getRawValue();
+    this.novasenha = dados;
+    this.novasenha.Token = this.token;
+    console.log(this.novasenha);
     this.service.redefinirSenha(dados).subscribe(x => {
       console.log(x);
+    }, error => {
+      this.mensagemError = error.error.message;
     })
   }
 

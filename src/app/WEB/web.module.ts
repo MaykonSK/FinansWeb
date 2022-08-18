@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MsgErrorComponent } from './Shared/MsgError/MsgError.component';
 import { MsgSuccessComponent } from './Shared/MsgSuccess/MsgSuccess.component';
 import { RedefinirSenhaComponent } from './Conta/Redefinir-senha/Redefinir-senha.component';
+import { EsqueciMinhaSenhaComponent } from './Conta/EsqueciMinhaSenha/EsqueciMinhaSenha.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RedefinirSenhaComponent } from './Conta/Redefinir-senha/Redefinir-senha
     LoadingComponent,
     MsgErrorComponent,
     MsgSuccessComponent,
-    RedefinirSenhaComponent
+    RedefinirSenhaComponent,
+    EsqueciMinhaSenhaComponent
   ],
   imports: [
     CommonModule,

@@ -17,7 +17,10 @@
           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="******" formControlName="Password">
         </div>
         <button type="submit" class="btn btn-primary w-100" [disabled]="login.invalid" (click)="LogarUsuario()">Login</button>
-        <p class="text-danger mt-2" *ngIf="mensagem.length">{{mensagem}}</p>
+        <app-MsgError [mensagem]="mensagemError"></app-MsgError>
+        <app-MsgSuccess [mensagem]="mensagemSuccess"></app-MsgSuccess>
+        <p class="mt-2"><a routerLink="/novasenha">Esqueceu a senha senha?</a></p>
+        <p>Ainda não tem cadastro? <a routerLink="/cadastro">Cadastre-se</a> </p>
       </form>
     </div>
   </div>

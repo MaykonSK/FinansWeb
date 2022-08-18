@@ -13,9 +13,8 @@ export class LoginUsuarioComponent implements OnInit {
 
   @Output() Loading: boolean = false;
 
-  private Token: string = "";
-  public statusLogin: boolean = false;
-  public mensagem: string = ""
+  public mensagemError: string = ""
+  public mensagemSuccess: string = ""
 
   constructor(private fb: FormBuilder, private service: WebService, private tokenService: TokenService, private router: Router) {}
 
@@ -39,7 +38,7 @@ export class LoginUsuarioComponent implements OnInit {
         this.Loading = false;
       }, error => {
         this.Loading = false;
-        this.mensagem = "Login inválido! Verifique os dados e tente novamente."
+        this.mensagemError = error.error.message;
       })
     }
   }
