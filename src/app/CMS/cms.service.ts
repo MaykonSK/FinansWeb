@@ -32,8 +32,8 @@ export class CmsService {
     return this.http.post(API+"/contaspagar", conta)
   }
 
-  recuperarContasPagar() {
-    return this.http.get<GetContasPagar[]>(API+"/contaspagar")
+  recuperarContasPagar(userId: number) {
+    return this.http.get<GetContasPagar[]>(API+"/contaspagar/"+userId)
   }
 
   deletarContaPagar(id: number) {

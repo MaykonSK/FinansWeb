@@ -22,7 +22,7 @@ export class RedefinirSenhaComponent implements OnInit {
 
   formulario: FormGroup;
 
-  constructor(private fb: FormBuilder, private service: WebService, private tokenService: TokenService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private service: WebService, private route: ActivatedRoute) { }
 
   configurarFormulario() {
     this.formulario = this.fb.group({
@@ -36,8 +36,6 @@ export class RedefinirSenhaComponent implements OnInit {
   ngOnInit() {
     this.configurarFormulario();
     this.token = this.route.snapshot.queryParamMap.get("token");
-    console.log("token: "+this.token);
-
   }
 
   redefinirSenha() {

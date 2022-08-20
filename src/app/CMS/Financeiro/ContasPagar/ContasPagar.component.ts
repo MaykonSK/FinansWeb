@@ -34,14 +34,12 @@ export class ContasPagarComponent implements OnInit {
   ngOnInit() {
     this.configurarFormulario();
     this.recuperarUsuario();
-    this.recuperarContas()
+    this.recuperarContas(this.infoUsuario.Id!)
   }
 
   recuperarUsuario() {
     this.usuario.retornaUsuario().subscribe(user => {
       this.infoUsuario = user;
-      console.log(this.infoUsuario);
-
     })
   }
 
@@ -57,13 +55,13 @@ export class ContasPagarComponent implements OnInit {
   cadastrarConta() {
     if (this.cadastro.valid) {
       this.conta = this.cadastro.getRawValue();
-      this.conta.UsuarioID = this.infoUsuario.usuario!;
+      this.conta.UsuarioID = this.infoUsuario.Id!;
       console.log(this.conta);
 
       this.service.cadastrarContaPagar(this.conta).subscribe(dados => {
         console.log(dados);
         this.mensagemSuccess = "Conta cadastrada com sucesso."
-        this.recuperarContas();
+        this.recuperarContas(this.infoUsuario.Id!);
         this.closeModal();
       }, error => {
         this.mensagemError = "Houve um erro ao tentar cadastrar."
@@ -72,16 +70,18 @@ export class ContasPagarComponent implements OnInit {
     }
   }
 
-  recuperarContas() {
-    this.service.recuperarContasPagar().subscribe(dados => {
-      this.contas = dados;
-      console.log(this.contas)
-    })
+  recuperarContas(usuarioId: number) {
+    if (usuarioId != null) {
+      this.service.recuperarContasPagar(usuarioId).subscribe(dados => {
+        this.contas = dados;
+        console.log(this.contas)
+      })
+    }
   }
 
   deletarConta(id: number) {
     this.service.deletarContaPagar(id).subscribe(dados => {
-      this.recuperarContas();
+      this.recuperarContas(this.infoUsuario.Id!);
     })
   }
 

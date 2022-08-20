@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from '../Autenticacao/login.guard';
 import { HomeComponent } from '../WEB/Home/Home.component';
+import { AtivacaoContaComponent } from './Conta/AtivacaoConta/AtivacaoConta.component';
 import { CadastroUsuarioComponent } from './Conta/CadastroUsuario/CadastroUsuario.component';
 import { EsqueciMinhaSenhaComponent } from './Conta/EsqueciMinhaSenha/EsqueciMinhaSenha.component';
 import { LoginUsuarioComponent } from './Conta/LoginUsuario/LoginUsuario.component';
@@ -16,7 +17,8 @@ const routes: Routes = [
       {path: "login", component: LoginUsuarioComponent, canActivate: [LoginGuard]},
       {path: "cadastro", component: CadastroUsuarioComponent, canActivate: [LoginGuard]},
       {path: "redefinir-senha", component: RedefinirSenhaComponent, canActivate: [LoginGuard]},
-      {path: "novasenha", component: EsqueciMinhaSenhaComponent, canActivate: [LoginGuard]}
+      {path: "novasenha", component: EsqueciMinhaSenhaComponent, canActivate: [LoginGuard]},
+      {path: "ativa", component: AtivacaoContaComponent, canActivate: [LoginGuard]}
     ]
   }
 ];

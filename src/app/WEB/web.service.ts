@@ -21,7 +21,11 @@ export class WebService {
   }
 
   redefinirSenha(dados: any): Observable<any> {
-    return this.http.post(API+"/redefinir-senha", dados)
+    return this.http.post(API+"/redefinir-senha", dados);
+  }
+
+  ativarConta(userId: number, code: string ): Observable<any> {
+    return this.http.get(API+"/ativa?UsuarioId="+userId+"&CodigoAtivacao="+code);
   }
 
 }

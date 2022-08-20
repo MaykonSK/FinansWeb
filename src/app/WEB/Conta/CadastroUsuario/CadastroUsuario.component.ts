@@ -21,7 +21,7 @@ export class CadastroUsuarioComponent implements OnInit {
   }
 
   cadastro = this.fb.group({
-    Username: [null, Validators.required],
+    Name: [null, Validators.required],
     Email: [null, [Validators.required, Validators.email]],
     Password: [null, Validators.required],
     RePassword: [null, Validators.required]
@@ -32,7 +32,7 @@ export class CadastroUsuarioComponent implements OnInit {
       this.Loading = true;
       const novoUsuario = this.cadastro.getRawValue(); //getRawValue() recupera todos os dados do formulario cadastro
       this.service.cadastrarUsuario(novoUsuario).subscribe(user => {
-        this.mensagemSuccess = user;
+        this.mensagemSuccess = user.message;
         this.Loading = false;
       }, error => {
         this.mensagemError = error.error.message

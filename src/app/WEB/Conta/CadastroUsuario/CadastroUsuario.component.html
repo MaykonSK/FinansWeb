@@ -10,8 +10,8 @@
       <form [formGroup]="cadastro">
         <div class="form-group">
           <label for="exampleInputName">Nome <strong class="text-danger">*</strong></label>
-          <input type="email" class="form-control" id="exampleInputName" placeholder="Ex: João da Silva" formControlName="Username">
-          <small class="form-text text-danger" *ngIf="cadastro.get('Username')?.touched && cadastro.get('Username')?.errors">Nome necessário</small>
+          <input type="email" class="form-control" id="exampleInputName" placeholder="Ex: João da Silva" formControlName="Name">
+          <small class="form-text text-danger" *ngIf="cadastro.get('Name')?.touched && cadastro.get('Name')?.errors">Nome necessário</small>
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">E-mail <strong class="text-danger">*</strong></label>
