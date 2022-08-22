@@ -40,4 +40,8 @@ export class CmsService {
     return this.http.delete(API+"/contaspagar/"+id)
   }
 
+  atualizarConta(conta: ContaPagar): Observable<any> {
+    return this.http.put(API+"/contaspagar", conta)
+  }
+
 }

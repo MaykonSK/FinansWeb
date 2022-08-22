@@ -14,8 +14,9 @@ import { GetContasPagar } from '../../Models/GetContasPagar';
 })
 export class ContasPagarComponent implements OnInit {
 
-  //fechar modal
+  //modal
   @ViewChild('closeBtn') closeBtn: ElementRef;
+  @ViewChild('openBtn') openBtn: ElementRef;
 
   title = "Contas a pagar"
 
@@ -26,6 +27,10 @@ export class ContasPagarComponent implements OnInit {
   conta: ContaPagar;
   contas: GetContasPagar[];
   infoUsuario: Usuario;
+  contaUnica: GetContasPagar;
+
+  btnCadastrar = false;
+  btnAtualizar = false;
 
   total: any;
 
@@ -70,11 +75,41 @@ export class ContasPagarComponent implements OnInit {
     }
   }
 
+  editarConta(id: number) {
+    this.btnAtualizar = true;
+    this.contaUnica = this.contas.find(conta => conta.id == id)!;
+
+    this.openModal();
+    this.cadastro.get("Descricao")?.setValue(this.contaUnica.descricao)
+    this.cadastro.get("Valor")?.setValue(this.contaUnica.valor)
+    this.cadastro.get("Vencimento")?.setValue(this.contaUnica.vencimento)
+    this.cadastro.get("Recorrente")?.setValue(this.contaUnica.recorrente)
+    this.conta = this.cadastro.getRawValue();
+
+    // this.cadastro.patchValue({
+    //   Descricao: this.contaUnica.id,
+    //   Valor: this.contaUnica.valor,
+    //   Vencimento: this.contaUnica.vencimento,
+    //   Recorrente: this.contaUnica.recorrente
+    // });
+  }
+
+  salvarEdicao() {
+    console.log(this.conta);
+
+    this.service.atualizarConta(this.conta).subscribe(dados => {
+      console.log(dados);
+
+    })
+  }
+
   recuperarContas(usuarioId: number) {
     if (usuarioId != null) {
       this.service.recuperarContasPagar(usuarioId).subscribe(dados => {
         this.contas = dados;
         console.log(this.contas)
+      }, error => {
+        console.log(error);
       })
     }
   }
@@ -95,6 +130,10 @@ export class ContasPagarComponent implements OnInit {
 
   private closeModal(): void {
     this.closeBtn.nativeElement.click();
+  }
+
+  private openModal(): void {
+    this.openBtn.nativeElement.click();
   }
 
 }
