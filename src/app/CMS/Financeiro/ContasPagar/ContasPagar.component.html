@@ -96,7 +96,7 @@
               <label class="form-check-label" for="flexSwitchCheckDefault">Recorrente</label>
             </div>
           </div>
-          <button class="btn btn-success w-100 mb-2" *ngIf="btnCadastrar == true" [disabled]="cadastro.invalid" (click)="cadastrarConta()">Cadastrar</button>
+          <!-- <button class="btn btn-success w-100 mb-2" [disabled]="cadastro.invalid" (click)="cadastrarConta()">Cadastrar</button> -->
           <button class="btn btn-success w-100 mb-2" *ngIf="btnAtualizar == true" [disabled]="cadastro.invalid" (click)="salvarEdicao()">Atualizar</button>
           <app-AlertError [mensagem]="mensagemError" >{{mensagemError}}</app-AlertError>
       </form>

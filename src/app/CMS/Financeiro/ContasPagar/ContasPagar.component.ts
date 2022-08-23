@@ -5,6 +5,7 @@ import { ContaPagar } from '../../Models/ContaPagar';
 import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 import { Usuario } from 'src/app/Autenticacao/Usuario/Usuario';
 import { GetContasPagar } from '../../Models/GetContasPagar';
+import { UpdateContaPagar } from '../../Models/UpdateContaPagar';
 
 
 @Component({
@@ -28,6 +29,8 @@ export class ContasPagarComponent implements OnInit {
   contas: GetContasPagar[];
   infoUsuario: Usuario;
   contaUnica: GetContasPagar;
+
+  updateContaPagar: UpdateContaPagar
 
   btnCadastrar = false;
   btnAtualizar = false;
@@ -84,20 +87,13 @@ export class ContasPagarComponent implements OnInit {
     this.cadastro.get("Valor")?.setValue(this.contaUnica.valor)
     this.cadastro.get("Vencimento")?.setValue(this.contaUnica.vencimento)
     this.cadastro.get("Recorrente")?.setValue(this.contaUnica.recorrente)
-    this.conta = this.cadastro.getRawValue();
-
-    // this.cadastro.patchValue({
-    //   Descricao: this.contaUnica.id,
-    //   Valor: this.contaUnica.valor,
-    //   Vencimento: this.contaUnica.vencimento,
-    //   Recorrente: this.contaUnica.recorrente
-    // });
   }
 
   salvarEdicao() {
-    console.log(this.conta);
+    this.conta = this.cadastro.getRawValue();
+    const idConta = this.contaUnica.id;
 
-    this.service.atualizarConta(this.conta).subscribe(dados => {
+    this.service.atualizarConta(idConta, this.conta).subscribe(dados => {
       console.log(dados);
 
     })

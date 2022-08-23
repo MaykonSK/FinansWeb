@@ -31,7 +31,12 @@ export class EsqueciMinhaSenhaComponent implements OnInit {
   }
 
   solicitarRedefinicaoSenha() {
-
+    const email = this.formulario.getRawValue()
+    this.service.solicitaSenha(email).subscribe(x => {
+      this.mensagemSuccess = x.message;
+    }, error => {
+      this.mensagemError = error.error.message;
+    })
   }
 
 

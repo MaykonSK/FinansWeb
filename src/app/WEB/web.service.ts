@@ -28,6 +28,10 @@ export class WebService {
     return this.http.get(API+"/ativa?UsuarioId="+userId+"&CodigoAtivacao="+code);
   }
 
+  solicitaSenha(email: any): Observable<any> {
+    return this.http.post(API+"/solicita-reset-senha", email)
+  }
+
 }
 
 

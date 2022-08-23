@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { TokenService } from '../Autenticacao/token.service';
 import { ContaPagar } from './Models/ContaPagar';
 import { GetContasPagar } from './Models/GetContasPagar';
+import { UpdateContaPagar } from './Models/UpdateContaPagar';
 
 const API = environment.FinansAPI;
 const APICEP = "https://viacep.com.br/ws";
@@ -40,8 +41,8 @@ export class CmsService {
     return this.http.delete(API+"/contaspagar/"+id)
   }
 
-  atualizarConta(conta: ContaPagar): Observable<any> {
-    return this.http.put(API+"/contaspagar", conta)
+  atualizarConta(id: number, conta: ContaPagar): Observable<any> {
+    return this.http.put(API+"/contaspagar/"+id, conta)
   }
 
 }

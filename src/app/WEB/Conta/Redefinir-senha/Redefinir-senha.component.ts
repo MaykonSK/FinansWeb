@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { TokenService } from 'src/app/Autenticacao/token.service';
 import { NovaSenha } from '../../Models/NovaSenha';
 import { WebService } from '../../web.service';
@@ -22,7 +22,7 @@ export class RedefinirSenhaComponent implements OnInit {
 
   formulario: FormGroup;
 
-  constructor(private fb: FormBuilder, private service: WebService, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private service: WebService, private route: ActivatedRoute, private router: Router) { }
 
   configurarFormulario() {
     this.formulario = this.fb.group({
@@ -44,7 +44,8 @@ export class RedefinirSenhaComponent implements OnInit {
     this.novasenha.Token = this.token;
     console.log(this.novasenha);
     this.service.redefinirSenha(dados).subscribe(x => {
-      console.log(x);
+      this.mensagemSuccess = x.message;
+      this.router.navigate(['/login']);
     }, error => {
       this.mensagemError = error.error.message;
     })
