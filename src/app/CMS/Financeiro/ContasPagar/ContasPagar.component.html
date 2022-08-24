@@ -12,11 +12,11 @@
 </section>
 
 <section>
-  <h4>Total em contas: R$</h4>
+  <h4>Total em contas: R${{ContasTotais}}</h4>
 </section>
 
 <section>
-  <table class="table table-hover mt-2">
+  <table class="table mt-2">
     <thead class="thead-dark">
       <tr>
         <th scope="col" class="">
@@ -34,15 +34,18 @@
         <th scope="col" class="">
           Recorrente
         </th>
-        <th scope="col" class="text-right">
-
+        <th scope="col" class="">
+          Paga
+        </th>
+        <th scope="col" class="text-center">
+          Opções
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of contas">
-        <td scope="col" class="">
-          #1
+      <tr *ngFor="let item of contas; let i = index" [ngClass]="{'bg-success text-white': item.paga}">
+        <td scope="col">
+           {{i}}
         </td>
         <td scope="col" class="">
           {{item.descricao}}
@@ -59,9 +62,16 @@
         <td scope="col" *ngIf="item.recorrente == false">
           Não
         </td>
-        <td scope="col" class="text-right">
-          <button class="btn btn-warning mr-2" (click)="BtnEditarConta(item.id)" data-toggle="modal" data-target="#exampleModalAtualizar" >Editar</button>
-          <button class="btn btn-danger" (click)="deletarConta(item.id)">Excluir</button>
+        <td scope="col" *ngIf="item.paga == true">
+          Sim
+        </td>
+        <td scope="col" *ngIf="!item.paga == true ">
+          Não
+        </td>
+        <td scope="col" class="text-center">
+          <mat-icon class="btn-icon mr-2" (click)="BtnEditarConta(item.id)" data-toggle="modal" data-target="#exampleModalAtualizar" title="Editar" >edit</mat-icon>
+          <mat-icon class="btn-icon mr-2" (click)="deletarConta(item.id)" title="Excluir">delete</mat-icon>
+          <mat-icon class="btn-icon" (click)="btnPaga(item.id)" title="Conta paga">price_check</mat-icon>
         </td>
       </tr>
     </tbody>

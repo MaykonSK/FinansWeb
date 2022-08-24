@@ -1,8 +1,11 @@
 .table {
-  cursor: pointer;
   table-layout:fixed;
   border-collapse: separate;
   border-spacing: 0 1em;
+}
+.table tbody tr:hover {
+  opacity: 0.9;
+  box-shadow: 10px 10px 5px #929292;
 }
 .table>:not(caption)>*>* {
   border-bottom-width: 0px;
@@ -25,3 +28,7 @@ tbody tr {
   padding-left: 3.5em;
   padding-top: 2.5em;
 }
+.btn-icon {
+  cursor: pointer;
+}
+

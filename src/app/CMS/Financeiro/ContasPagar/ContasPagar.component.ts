@@ -6,6 +6,7 @@ import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 import { Usuario } from 'src/app/Autenticacao/Usuario/Usuario';
 import { GetContasPagar } from '../../Models/GetContasPagar';
 import { UpdateContaPagar } from '../../Models/UpdateContaPagar';
+import { ContaPaga } from '../../Models/ContaPaga';
 
 
 @Component({
@@ -30,14 +31,23 @@ export class ContasPagarComponent implements OnInit {
   infoUsuario: Usuario;
   contaUnica: GetContasPagar;
 
-  updateContaPagar: UpdateContaPagar
+  updateContaPagar: UpdateContaPagar;
+
+  contaPaga: ContaPaga = new ContaPaga;
+
+  ContasTotais: number;
 
   constructor(private service: CmsService, private fb: FormBuilder, private usuario: UsuarioService) { }
 
   ngOnInit() {
-    this.configurarFormulario();
     this.recuperarUsuario();
+    this.configurarFormulario();
+    this.load();
+  }
+
+  load() {
     this.recuperarContas(this.infoUsuario.Id!)
+    this.totalContas();
   }
 
   recuperarUsuario() {
@@ -59,15 +69,13 @@ export class ContasPagarComponent implements OnInit {
     if (this.cadastro.valid) {
       this.conta = this.cadastro.getRawValue();
       this.conta.UsuarioID = this.infoUsuario.Id!;
-      console.log(this.conta);
 
       this.service.cadastrarContaPagar(this.conta).subscribe(dados => {
-        console.log(dados);
-        this.mensagemSuccess = "Conta cadastrada com sucesso."
-        this.recuperarContas(this.infoUsuario.Id!);
+        this.mensagemSuccess = dados.message;
+        this.load();
         this.closeModal();
       }, error => {
-        this.mensagemError = "Houve um erro ao tentar cadastrar."
+        this.mensagemError = error.error.message;
       })
 
     }
@@ -92,7 +100,7 @@ export class ContasPagarComponent implements OnInit {
 
     this.service.atualizarConta(idConta, this.conta).subscribe(dados => {
       this.closeModal2()
-      this.recuperarContas(this.infoUsuario.Id!);
+      this.load();
       this.mensagemSuccess = dados.message;
     }, error => {
       this.mensagemError = error.error.message;
@@ -103,16 +111,36 @@ export class ContasPagarComponent implements OnInit {
     if (usuarioId != null) {
       this.service.recuperarContasPagar(usuarioId).subscribe(dados => {
         this.contas = dados;
-        console.log(this.contas)
       }, error => {
-        console.log(error);
       })
     }
   }
 
   deletarConta(id: number) {
     this.service.deletarContaPagar(id).subscribe(dados => {
-      this.recuperarContas(this.infoUsuario.Id!);
+      this.load();
+    })
+  }
+
+  btnPaga(id: number) {
+    this.contaUnica = this.contas.find(conta => conta.id == id)!;
+
+    if (this.contaUnica != null) {
+      this.contaPaga.Paga = true;
+
+      this.service.contaPaga(this.contaUnica.id, this.contaPaga).subscribe(x => {
+        this.load();
+        this.mensagemSuccess = x.message;
+      }, error => {
+        this.mensagemError = error.error.message;
+      })
+    }
+
+  }
+
+  totalContas() {
+    this.service.totalContas(this.infoUsuario.Id!).subscribe(x => {
+      this.ContasTotais = x;
     })
   }
 
@@ -124,3 +152,4 @@ export class ContasPagarComponent implements OnInit {
   }
 
 }
+

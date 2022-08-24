@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TokenService } from '../Autenticacao/token.service';
+import { ContaPaga } from './Models/ContaPaga';
 import { ContaPagar } from './Models/ContaPagar';
 import { GetContasPagar } from './Models/GetContasPagar';
 import { UpdateContaPagar } from './Models/UpdateContaPagar';
@@ -43,6 +44,14 @@ export class CmsService {
 
   atualizarConta(id: number, conta: ContaPagar): Observable<any> {
     return this.http.put(API+"/contaspagar/"+id, conta)
+  }
+
+  contaPaga(id: number, conta: ContaPaga): Observable<any> {
+    return this.http.put(API+"/contapaga/"+id, conta)
+  }
+
+  totalContas(userId: number): Observable<any>  {
+    return this.http.get(API+"/totalconta/"+userId)
   }
 
 }
