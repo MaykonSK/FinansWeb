@@ -17,7 +17,7 @@ export class ContasPagarComponent implements OnInit {
 
   //modal
   @ViewChild('closeBtn') closeBtn: ElementRef;
-  @ViewChild('openBtn') openBtn: ElementRef;
+  @ViewChild('closeBtn2') closeBtn2: ElementRef;
 
   title = "Contas a pagar"
 
@@ -31,11 +31,6 @@ export class ContasPagarComponent implements OnInit {
   contaUnica: GetContasPagar;
 
   updateContaPagar: UpdateContaPagar
-
-  btnCadastrar = false;
-  btnAtualizar = false;
-
-  total: any;
 
   constructor(private service: CmsService, private fb: FormBuilder, private usuario: UsuarioService) { }
 
@@ -78,11 +73,13 @@ export class ContasPagarComponent implements OnInit {
     }
   }
 
-  editarConta(id: number) {
-    this.btnAtualizar = true;
+  btnCadastro() {
+    this.cadastro.reset();
+  }
+
+  BtnEditarConta(id: number) {
     this.contaUnica = this.contas.find(conta => conta.id == id)!;
 
-    this.openModal();
     this.cadastro.get("Descricao")?.setValue(this.contaUnica.descricao)
     this.cadastro.get("Valor")?.setValue(this.contaUnica.valor)
     this.cadastro.get("Vencimento")?.setValue(this.contaUnica.vencimento)
@@ -94,8 +91,11 @@ export class ContasPagarComponent implements OnInit {
     const idConta = this.contaUnica.id;
 
     this.service.atualizarConta(idConta, this.conta).subscribe(dados => {
-      console.log(dados);
-
+      this.closeModal2()
+      this.recuperarContas(this.infoUsuario.Id!);
+      this.mensagemSuccess = dados.message;
+    }, error => {
+      this.mensagemError = error.error.message;
     })
   }
 
@@ -116,20 +116,11 @@ export class ContasPagarComponent implements OnInit {
     })
   }
 
-  somarContas() {
-    this.contas.forEach(element => {
-      this.total += element.valor
-    });
-    console.log(this.total);
-
-  }
-
   private closeModal(): void {
     this.closeBtn.nativeElement.click();
   }
-
-  private openModal(): void {
-    this.openBtn.nativeElement.click();
+  private closeModal2(): void {
+    this.closeBtn2.nativeElement.click();
   }
 
 }

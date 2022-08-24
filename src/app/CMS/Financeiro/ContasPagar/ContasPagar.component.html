@@ -3,15 +3,16 @@
 </section>
 
 <section class="mt-4 mb-4">
-  <div class="text-right">
+  <div class="text-right mb-4">
     <button type="button" class="btn btn-warning mr-2">Calculadora</button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" #openBtn>Cadastrar</button>
+    <button type="button" class="btn btn-primary" (click)="btnCadastro()" data-toggle="modal" data-target="#exampleModal">Cadastrar</button>
   </div>
-  <app-AlertSuccess class="mt-2" [mensagem]="mensagemSuccess">{{mensagemSuccess}}</app-AlertSuccess>
+  <app-AlertSuccess  [mensagem]="mensagemSuccess">{{mensagemSuccess}}</app-AlertSuccess>
+  <app-AlertError [mensagem]="mensagemError">{{mensagemError}}</app-AlertError>
 </section>
 
 <section>
-  <h4>Total em contas: R${{total}}</h4>
+  <h4>Total em contas: R$</h4>
 </section>
 
 <section>
@@ -59,7 +60,7 @@
           Não
         </td>
         <td scope="col" class="text-right">
-          <button class="btn btn-warning mr-2" (click)="editarConta(item.id)">Editar</button>
+          <button class="btn btn-warning mr-2" (click)="BtnEditarConta(item.id)" data-toggle="modal" data-target="#exampleModalAtualizar" >Editar</button>
           <button class="btn btn-danger" (click)="deletarConta(item.id)">Excluir</button>
         </td>
       </tr>
@@ -96,13 +97,53 @@
               <label class="form-check-label" for="flexSwitchCheckDefault">Recorrente</label>
             </div>
           </div>
-          <!-- <button class="btn btn-success w-100 mb-2" [disabled]="cadastro.invalid" (click)="cadastrarConta()">Cadastrar</button> -->
-          <button class="btn btn-success w-100 mb-2" *ngIf="btnAtualizar == true" [disabled]="cadastro.invalid" (click)="salvarEdicao()">Atualizar</button>
+          <button class="btn btn-success w-100 mb-2" [disabled]="cadastro.invalid" (click)="cadastrarConta()">Cadastrar</button>
           <app-AlertError [mensagem]="mensagemError" >{{mensagemError}}</app-AlertError>
       </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeBtn>Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalAtualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Atualizar</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form " [formGroup]="cadastro">
+          <div class="row">
+            <div class="form-group col-6">
+              <label for="descricao">Descrição <strong class="text-danger"></strong></label>
+              <input type="text" class="form-control mb-2" id="descricao" placeholder="Ex: Internet" formControlName="Descricao">
+            </div>
+            <div class="form-group col-6" >
+              <label for="valor">Valor <strong class="text-danger">*</strong></label>
+              <input type="text" class="form-control mb-2" mask="separator.2" [thousandSeparator]="'.'" [decimalMarker]="','" prefix="R$ " [dropSpecialCharacters]="true" id="valor" formControlName="Valor">
+            </div>
+            <div class="form-group col-6" >
+              <label for="vencimento">Vencimento</label>
+              <input type="date" class="form-control mb-2" id="vencimento" formControlName="Vencimento">
+            </div>
+            <div class="form-check form-switch col-6">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" formControlName="Recorrente" >
+              <label class="form-check-label" for="flexSwitchCheckDefault">Recorrente</label>
+            </div>
+          </div>
+          <button class="btn btn-success w-100 mb-2" [disabled]="cadastro.invalid" (click)="salvarEdicao()">Atualizar</button>
+          <app-AlertError [mensagem]="mensagemError" >{{mensagemError}}</app-AlertError>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeBtn2>Fechar</button>
       </div>
     </div>
   </div>
