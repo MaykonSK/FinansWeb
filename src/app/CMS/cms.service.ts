@@ -18,6 +18,8 @@ export class CmsService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
+  //Contas a pagar
+
   recuperarImoveis(): Observable<any> {
     return this.http.get(API+"/imovel");
   }
@@ -52,6 +54,15 @@ export class CmsService {
 
   totalContas(userId: number): Observable<any>  {
     return this.http.get(API+"/totalconta/"+userId)
+  }
+
+  //Upload files
+  uploadFile(file: FormData): Observable<any> {
+    return this.http.post(API+"/upload", file)
+  }
+
+  getImg(): Observable<any> {
+    return this.http.get(API+"/ImgProfile")
   }
 
 }

@@ -1,3 +1,10 @@
-<p>
-  Conta works!
-</p>
+<form [formGroup]="formulario">
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="customFile" (change)="UploadImg($event)" formControlName="file">
+    <label class="custom-file-label" for="customFile" id="customFileLabel" >Selecione o arquivo</label>
+  </div>
+  <button [disabled]="formulario.invalid" class="btn btn-success mt-2" (click)="salvar()" >Salvar</button>
+</form>
+
+<img [src]="imageUrl" alt="">
+

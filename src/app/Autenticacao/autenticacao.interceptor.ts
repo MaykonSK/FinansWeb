@@ -9,11 +9,12 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { TokenService } from './token.service';
 import { UsuarioService } from './Usuario/usuario.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AutenticacaoInterceptor implements HttpInterceptor {
 
-  constructor(private tokenSerivce: TokenService, private usuarioService: UsuarioService) {}
+  constructor(private tokenSerivce: TokenService, private usuarioService: UsuarioService, private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (this.tokenSerivce.possuiToken()) {
@@ -25,6 +26,7 @@ export class AutenticacaoInterceptor implements HttpInterceptor {
       if (err.status === 401) {
           // desloga o usuário caso o token da API tenha expirado.
           this.usuarioService.logout();
+          this.router.navigate(['/login']);
       }
       return throwError(err);
   }));

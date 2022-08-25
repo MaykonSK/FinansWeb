@@ -21,6 +21,7 @@ import { AlertErrorComponent } from './Shared/AlertError/AlertError.component';
 import { AlertSuccessComponent } from './Shared/AlertSuccess/AlertSuccess.component';
 import { LoadComponent } from './Shared/Load/Load.component';
 import { AutenticacaoInterceptor } from '../Autenticacao/autenticacao.interceptor';
+import { ContaComponent } from './Conta/Conta/Conta.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AutenticacaoInterceptor } from '../Autenticacao/autenticacao.intercepto
     ContasReceberComponent,
     AlertErrorComponent,
     AlertSuccessComponent,
-    LoadComponent
+    LoadComponent,
+    ContaComponent
   ],
   imports: [
     CommonModule,
