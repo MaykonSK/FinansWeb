@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpEventType } from '@angular/common/http';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CmsService } from '../../cms.service';
 
@@ -9,16 +10,20 @@ import { CmsService } from '../../cms.service';
 })
 export class ContaComponent implements OnInit {
 
+  @Output() Loading: string | null;
+
   formulario: FormGroup;
   selectFile: any;
   imageUrl: any;
   sanitizer: any;
 
+  ProgressoUpload: string;
+
   constructor(private fb: FormBuilder, private service: CmsService) { }
 
   ngOnInit() {
     this.configurarFormulario();
-    this.getImagem();
+    // this.getImagem();
   }
 
   configurarFormulario() {
@@ -39,11 +44,16 @@ export class ContaComponent implements OnInit {
       const formData = new FormData;
       formData.append('file', this.selectFile)
 
-      this.service.uploadFile(formData).subscribe(x => {
-        console.log(x);
+      this.service.uploadFile(formData).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.ProgressoUpload = (Math.round(event.loaded / event.total * 100) + '%');
+          console.log(this.Loading);
+        } else if (event.type === HttpEventType.Response) {
+          console.log(event);
+        }
+        this.Loading = null;
       }, error => {
         console.log(error.error.message);
-
       })
     }
   }

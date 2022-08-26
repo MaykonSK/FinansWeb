@@ -5,5 +5,6 @@ export class GetContasPagar {
   valor: number;
   vencimento: Date;
   recorrente: boolean
-  paga: boolean
+  paga: boolean;
+  status: string;
 }

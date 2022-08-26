@@ -1,10 +1,10 @@
+<app-Load [Loading]="Loading"></app-Load>
 <form [formGroup]="formulario">
   <div class="custom-file">
     <input type="file" class="custom-file-input" id="customFile" (change)="UploadImg($event)" formControlName="file">
     <label class="custom-file-label" for="customFile" id="customFileLabel" >Selecione o arquivo</label>
+    <span class="text-primary">{{ProgressoUpload}} <span *ngIf="ProgressoUpload == '100%'">concluído</span></span>
   </div>
   <button [disabled]="formulario.invalid" class="btn btn-success mt-2" (click)="salvar()" >Salvar</button>
 </form>
-
-<img [src]="imageUrl" alt="">
 

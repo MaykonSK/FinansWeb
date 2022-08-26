@@ -7,11 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LoadComponent implements OnInit {
 
-  @Input() Loading: boolean = false;
+  @Input() Loading: string | null;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

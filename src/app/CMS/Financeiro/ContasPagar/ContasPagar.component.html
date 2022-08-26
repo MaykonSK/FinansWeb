@@ -1,5 +1,7 @@
+<app-Load [Loading]="Loading"></app-Load>
 <section>
   <h2 class="text-center mt-2 mb-4 text-primary">{{title}}</h2>
+  <h3 class="text-right">{{ hoje | date:'dd/MM/yyyy' }}</h3>
 </section>
 
 <section class="mt-4 mb-4">
@@ -13,9 +15,10 @@
 
 <section>
   <h4>Total em contas: R${{ContasTotais}}</h4>
+  <h4 class="text-danger" *ngIf="ContasAtrasadas > 0">Você possui {{ContasAtrasadas}} conta(s) atrasada(s)</h4>
 </section>
 
-<section>
+<section class="table-responsive">
   <table class="table mt-2">
     <thead class="thead-dark">
       <tr>
@@ -35,7 +38,7 @@
           Recorrente
         </th>
         <th scope="col" class="">
-          Paga
+          Status
         </th>
         <th scope="col" class="text-center">
           Opções
@@ -43,7 +46,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of contas; let i = index" [ngClass]="{'bg-success text-white': item.paga}">
+      <tr *ngFor="let item of contas; let i = index" [ngClass]="{'bg-success text-white': item.paga, 'bg-warning text-white': item.status == 'Vencimento Próx', 'bg-danger text-white': item.status == 'Vencido' }">
         <td scope="col">
            {{i}}
         </td>
@@ -63,19 +66,20 @@
           Não
         </td>
         <td scope="col" *ngIf="item.paga == true">
-          Sim
+          Pago
         </td>
         <td scope="col" *ngIf="!item.paga == true ">
-          Não
+          {{item.status}}
         </td>
         <td scope="col" class="text-center">
           <mat-icon class="btn-icon mr-2" (click)="BtnEditarConta(item.id)" data-toggle="modal" data-target="#exampleModalAtualizar" title="Editar" >edit</mat-icon>
-          <mat-icon class="btn-icon mr-2" (click)="deletarConta(item.id)" title="Excluir">delete</mat-icon>
+          <mat-icon class="btn-icon mr-2" (click)="BtnDeletarConta(item.id)" title="Excluir">delete</mat-icon>
           <mat-icon class="btn-icon" (click)="btnPaga(item.id)" title="Conta paga">price_check</mat-icon>
         </td>
       </tr>
     </tbody>
   </table>
+</section>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

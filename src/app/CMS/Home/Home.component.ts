@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   recuperarUsuario() {
     this.usuario.retornaUsuario().subscribe(user => {
+      console.log(user);
       this.infoUsuario = user;
     })
   }

@@ -58,7 +58,10 @@ export class CmsService {
 
   //Upload files
   uploadFile(file: FormData): Observable<any> {
-    return this.http.post(API+"/upload", file)
+    return this.http.post(API+"/upload", file, {
+      reportProgress: true,
+      observe: 'events'
+    })
   }
 
   getImg(): Observable<any> {
