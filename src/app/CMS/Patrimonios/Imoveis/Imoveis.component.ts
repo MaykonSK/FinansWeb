@@ -34,8 +34,8 @@ export class ImoveisComponent implements OnInit {
     })
   }
 
-  recuperarImoveis() {
-    this.service.recuperarImoveis().subscribe(imovel => {
+  recuperarImoveis(userId: number) {
+    this.service.recuperarImoveis(userId).subscribe(imovel => {
       console.log(imovel);
     })
   }

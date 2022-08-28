@@ -18,15 +18,17 @@ export class CmsService {
 
   constructor(private http: HttpClient, private tokenService: TokenService) { }
 
-  //Contas a pagar
+  //Imoveis
 
-  recuperarImoveis(): Observable<any> {
-    return this.http.get(API+"/imovel");
+  recuperarImoveis(userId: number): Observable<any> {
+    return this.http.get(API+"/imoveis/"+userId);
   }
 
   cadastrarImovel(imovel: any) {
-    return this.http.post(API+"/imovel", imovel)
+    return this.http.post(API+"/imoveis", imovel)
   }
+
+  //Contas a pagar
 
   getCep(cep: number): Observable<any> {
     return this.http.get(APICEP+"/" + cep + "/json");
