@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CmsService } from '../../cms.service';
 import { EnderecoInterface } from '../../Models/EnderecoInterface';
 import {MatDialog} from '@angular/material/dialog';
+import { Imovel } from '../../Models/Imovel';
+import { Usuario } from 'src/app/Autenticacao/Usuario/Usuario';
+import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 
 @Component({
   selector: 'app-Imoveis',
@@ -13,24 +16,38 @@ export class ImoveisComponent implements OnInit {
 
   public mensagem: string;
   public endereco: EnderecoInterface;
+  public imovel: Imovel
+  public infoUsuario: Usuario
 
   cadastro: FormGroup;
 
-  constructor(private service: CmsService, private fb: FormBuilder) {
+  constructor(private service: CmsService, private fb: FormBuilder, private usuario: UsuarioService) {
   }
 
   ngOnInit() {
+    this.recuperarUsuario();
     this.configurarFormulario();
   }
 
   configurarFormulario() {
     this.cadastro = this.fb.group({
-      cep: [null, Validators.required],
-      logradouro: [null, Validators.required],
-      bairro: [null, Validators.required],
-      numeroCasa: [null, Validators.required],
-      uf: [null, Validators.required],
-      localidade: [null, Validators.required]
+      Descricao: [null],
+      CodigoIptu: [null],
+      SitePrefeitura: [null],
+      Endereco: this.fb.group({
+        Cep: [null, Validators.required],
+        Rua: [null, Validators.required],
+        Bairro: [null, Validators.required],
+        Numero: [null, Validators.required],
+        Estado: [null, Validators.required],
+        Municipio: [null, Validators.required]
+      })
+    })
+  }
+
+  recuperarUsuario() {
+    this.usuario.retornaUsuario().subscribe(user => {
+      this.infoUsuario = user;
     })
   }
 
@@ -40,39 +57,44 @@ export class ImoveisComponent implements OnInit {
     })
   }
 
-  localizarCep() {
-    if (this.cadastro.valid) {
-      const cep = this.cadastro.value.cep
-      console.log(cep);
-      this.service.getCep(cep).subscribe(dados => {
-        this.endereco = dados;
-        console.log(this.endereco)
-        this.cadastro.patchValue({
-          logradouro: this.endereco.logradouro,
-          uf: this.endereco.uf,
-          localidade: this.endereco.localidade,
-          bairro: this.endereco.bairro
-        })
-        if (!this.endereco.logradouro.length || !this.endereco.bairro.length)  {
-          this.cadastro.value.logradouro.enable(); //ativar input
-          this.mensagem = 'Não foi possivel encontrar o campo. Por favor, insira acima.'
-        } else {
-          this.cadastro.value.logradouro.disable();//desativar input
-          this.mensagem = ''
-        }
-      }, error => {
-        //console.log('Cep não encontrado!\n'+error)
-      })
-    }
-  }
+  // localizarCep() {
+  //   if (this.cadastro.valid) {
+  //     const cep = this.cadastro.value.cep
+  //     console.log(cep);
+  //     this.service.getCep(cep).subscribe(dados => {
+  //       this.endereco = dados;
+  //       console.log(this.endereco)
+  //       this.cadastro.patchValue({
+  //         logradouro: this.endereco.logradouro,
+  //         uf: this.endereco.uf,
+  //         localidade: this.endereco.localidade,
+  //         bairro: this.endereco.bairro
+  //       })
+  //       if (!this.endereco.logradouro.length || !this.endereco.bairro.length)  {
+  //         this.cadastro.value.logradouro.enable(); //ativar input
+  //         this.mensagem = 'Não foi possivel encontrar o campo. Por favor, insira acima.'
+  //       } else {
+  //         this.cadastro.value.logradouro.disable();//desativar input
+  //         this.mensagem = ''
+  //       }
+  //     }, error => {
+  //       //console.log('Cep não encontrado!\n'+error)
+  //     })
+  //   }
+  // }
 
   cadastrarImovel() {
     if (this.cadastro.valid) {
-      const imovel = this.cadastro.getRawValue(); //getRawValue() recupera todos os dados do formulario cadastro
-      this.service.cadastrarImovel(imovel).subscribe(dados => {
-      console.log(dados)
-    })
+      this.imovel.Endereco = this.cadastro.getRawValue() //getRawValue() recupera todos os dados do formulario cadastro
+      this.imovel.UsuarioId = this.infoUsuario.Id!;
+      console.log(this.imovel.Endereco);
+
+      // this.service.cadastrarImovel(this.imovel).subscribe(dados => {
+      //   console.log(dados)
+      // })
     }
   }
+
+
 
 }

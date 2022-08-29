@@ -6,6 +6,7 @@ import { TokenService } from '../Autenticacao/token.service';
 import { ContaPaga } from './Models/ContaPaga';
 import { ContaPagar } from './Models/ContaPagar';
 import { GetContasPagar } from './Models/GetContasPagar';
+import { Imovel } from './Models/Imovel';
 import { UpdateContaPagar } from './Models/UpdateContaPagar';
 
 const API = environment.FinansAPI;
@@ -24,7 +25,7 @@ export class CmsService {
     return this.http.get(API+"/imoveis/"+userId);
   }
 
-  cadastrarImovel(imovel: any) {
+  cadastrarImovel(imovel: Imovel) {
     return this.http.post(API+"/imoveis", imovel)
   }
 

@@ -70,8 +70,8 @@
   </table>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title" id="exampleModalLabel">Cadastrar Imóvel</h3>
@@ -83,30 +83,42 @@
         <form class="form" [formGroup]="cadastro" >
           <div class="row">
             <div class="form-group col-6">
+              <label for="desc">Descrição <strong class="text-danger"></strong></label>
+              <input type="text" class="form-control mb-2" id="desc" placeholder="Ex: Casa Centro" formControlName="Descricao">
+            </div>
+            <div class="form-group col-6">
+              <label for="iptu">Código IPTU <strong class="text-danger"></strong></label>
+              <input type="text" class="form-control mb-2" id="iptu" placeholder="Ex: 12345678" formControlName="CodigoIptu">
+            </div>
+            <div class="form-group col-6">
+              <label for="site">Site IPTU Prefeitura <strong class="text-danger"></strong></label>
+              <input type="text" class="form-control mb-2" id="site" placeholder="Ex: wwww.prefeitura.com.br/IPTU" formControlName="SitePrefeitura">
+            </div>
+            <div class="form-group col-6">
               <label for="cep">Cep <strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="cep" placeholder="Ex: 38050000" formControlName="cep" (keyup)="localizarCep()">
+              <input type="text" class="form-control mb-2" id="cep" placeholder="Ex: 38050000" formControlName="Cep">
             </div>
             <div class="form-group col-6" >
               <label for="rua">Rua <strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="rua" formControlName="logradouro">
+              <input type="text" class="form-control mb-2" id="rua" formControlName="Rua">
               <small class="text-danger">{{mensagem}}</small>
             </div>
             <div class="form-group col-6" >
               <label for="numeroCasa">Número</label>
-              <input type="text" class="form-control mb-2" id="numeroCasa" formControlName="numeroCasa">
+              <input type="text" class="form-control mb-2" id="numeroCasa" formControlName="Numero">
             </div>
             <div class="form-group col-6" >
               <label for="bairro">Bairro<strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="bairro" formControlName="bairro">
+              <input type="text" class="form-control mb-2" id="bairro" formControlName="Bairro">
               <small class="text-danger">{{mensagem}}</small>
             </div>
             <div class="form-group col-6">
               <label for="estado">Estado <strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="estado" formControlName="uf">
+              <input type="text" class="form-control mb-2" id="estado" formControlName="Estado">
             </div>
             <div class="form-group col-6">
               <label for="municipio">Município <strong class="text-danger">*</strong></label>
-              <input type="text" class="form-control mb-2" id="municipio" formControlName="localidade">
+              <input type="text" class="form-control mb-2" id="municipio" formControlName="Municipio">
             </div>
           </div>
           <button [disabled]="cadastro.invalid" (click)="cadastrarImovel()" class="btn btn-success w-100 mb-2">Cadastrar</button>
