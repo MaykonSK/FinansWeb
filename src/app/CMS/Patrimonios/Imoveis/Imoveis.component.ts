@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { Imovel } from '../../Models/Imovel';
 import { Usuario } from 'src/app/Autenticacao/Usuario/Usuario';
 import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
+import { GetImoveis } from '../../Models/GetImoveis';
 
 @Component({
   selector: 'app-Imoveis',
@@ -15,9 +16,9 @@ import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 export class ImoveisComponent implements OnInit {
 
   public mensagem: string;
-  public endereco: EnderecoInterface;
-  public imovel: Imovel
-  public infoUsuario: Usuario
+  public imovel: Imovel;
+  public imoveis: GetImoveis[];
+  public infoUsuario: Usuario;
 
   cadastro: FormGroup;
 
@@ -25,13 +26,18 @@ export class ImoveisComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.load();
+  }
+
+  load() {
     this.recuperarUsuario();
     this.configurarFormulario();
+    this.recuperarImoveis(this.infoUsuario.Id!);
   }
 
   configurarFormulario() {
     this.cadastro = this.fb.group({
-      Descricao: [null],
+      Descricao: [null, Validators.required],
       CodigoIptu: [null],
       SitePrefeitura: [null],
       Endereco: this.fb.group({
@@ -52,8 +58,9 @@ export class ImoveisComponent implements OnInit {
   }
 
   recuperarImoveis(userId: number) {
-    this.service.recuperarImoveis(userId).subscribe(imovel => {
-      console.log(imovel);
+    this.service.recuperarImoveis(userId).subscribe(imoveis => {
+      this.imoveis = imoveis;
+      console.log(this.imoveis);
     })
   }
 
@@ -85,13 +92,13 @@ export class ImoveisComponent implements OnInit {
 
   cadastrarImovel() {
     if (this.cadastro.valid) {
-      this.imovel.Endereco = this.cadastro.getRawValue() //getRawValue() recupera todos os dados do formulario cadastro
+      this.imovel = this.cadastro.getRawValue(); //getRawValue() recupera todos os dados do formulario cadastro
       this.imovel.UsuarioId = this.infoUsuario.Id!;
-      console.log(this.imovel.Endereco);
+      console.log(this.imovel);
 
-      // this.service.cadastrarImovel(this.imovel).subscribe(dados => {
-      //   console.log(dados)
-      // })
+      this.service.cadastrarImovel(this.imovel).subscribe(dados => {
+        console.log(dados)
+      })
     }
   }
 
