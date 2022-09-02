@@ -21,10 +21,26 @@
         data-mdb-parent="#basicAccordion" style="">
         <div class="accordion-body row">
           <div class="col-6">
-            <strong>Endereço</strong>
-            <p>Rua: {{item.endereco.rua}}</p>
+            <div class="endereco">{{item.rua}}, {{item.numero}} - {{item.bairro}}</div>
+            <span>{{item.municipio}} - {{item.estado}}, {{item.cep}}</span>
+          </div>
+          <div class="col-6">
+            <div>
+              <strong>Prefeitura</strong>
+              <br>
+              <a target="_blank" [href]="item.sitePrefeitura">Link</a>
+            </div>
+            <div class="mt-2">
+              <strong>Código IPTU</strong>
+              <p>{{item.codigoIptu}}</p>
+            </div>
           </div>
         </div>
+        <div class="text-right">
+          <mat-icon class="btn-icon mr-2"  data-toggle="modal" data-target="#exampleModalAtualizar" title="Editar" >edit</mat-icon>
+          <mat-icon class="btn-icon mr-2"  title="Excluir">delete</mat-icon>
+        </div>
+
       </div>
     </div>
   </div>

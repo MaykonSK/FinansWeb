@@ -20,3 +20,11 @@ tbody tr {
 tbody tr:hover {
   opacity: 0.7;
 }
+.endereco {
+  margin-top: 5px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+a {
+  text-decoration: none;
+}
