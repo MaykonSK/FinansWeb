@@ -2,6 +2,9 @@ import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CmsService } from '../../cms.service';
+import { DomSanitizer} from '@angular/platform-browser';
+import { Usuario } from 'src/app/Autenticacao/Usuario/Usuario';
+import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 
 @Component({
   selector: 'app-Conta',
@@ -15,15 +18,17 @@ export class ContaComponent implements OnInit {
   formulario: FormGroup;
   selectFile: any;
   imageUrl: any;
-  sanitizer: any;
+
+  public infoUsuario: Usuario;
 
   ProgressoUpload: string;
 
-  constructor(private fb: FormBuilder, private service: CmsService) { }
+  constructor(private fb: FormBuilder, private service: CmsService, private sanitizer: DomSanitizer, private usuario: UsuarioService) { }
 
   ngOnInit() {
+    this.recuperarUsuario();
     this.configurarFormulario();
-    // this.getImagem();
+    this.getInfoUser();
   }
 
   configurarFormulario() {
@@ -39,12 +44,18 @@ export class ContaComponent implements OnInit {
     document.getElementById('customFileLabel')!.innerHTML = this.selectFile.name
   }
 
+  recuperarUsuario() {
+    this.usuario.retornaUsuario().subscribe(user => {
+      this.infoUsuario = user;
+    })
+  }
+
   salvar() {
     if (this.formulario.valid)  {
       const formData = new FormData;
       formData.append('file', this.selectFile)
 
-      this.service.uploadFile(formData).subscribe(event => {
+      this.service.uploadFile(formData, this.infoUsuario.Id!).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.ProgressoUpload = (Math.round(event.loaded / event.total * 100) + '%');
           console.log(this.Loading);
@@ -58,11 +69,11 @@ export class ContaComponent implements OnInit {
     }
   }
 
-  getImagem() {
-    this.service.getImg().subscribe(x => {
+  getInfoUser() {
+    this.service.getUser(this.infoUsuario.Id!).subscribe(x => {
       console.log(x);
-      // let objectURL = 'data:image/jpeg;base64,' + x;
-      // this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);;
+      let objectURL = 'data:image/jpeg;base64,' + x.imagem;
+      this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
     })
   }
 

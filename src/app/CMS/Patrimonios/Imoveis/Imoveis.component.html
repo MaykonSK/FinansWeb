@@ -20,11 +20,14 @@
       <div id="basicAccordionCollapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
         data-mdb-parent="#basicAccordion" style="">
         <div class="accordion-body row">
+          <div class="col-3">
+            Imagem
+          </div>
           <div class="col-6">
             <div class="endereco">{{item.rua}}, {{item.numero}} - {{item.bairro}}</div>
             <span>{{item.municipio}} - {{item.estado}}, {{item.cep}}</span>
           </div>
-          <div class="col-6">
+          <div class="col-3">
             <div>
               <strong>Prefeitura</strong>
               <br>
@@ -67,9 +70,14 @@
               <label for="iptu">Código IPTU <strong class="text-danger"></strong></label>
               <input type="text" class="form-control mb-2" id="iptu" placeholder="Ex: 12345678" formControlName="CodigoIptu">
             </div>
-            <div class="form-group col-12 col-md-12">
+            <div class="form-group col-12 col-md-6">
               <label for="site">Site IPTU Prefeitura <strong class="text-danger"></strong></label>
               <input type="text" class="form-control mb-2" id="site" placeholder="Ex: wwww.prefeitura.com.br/IPTU" formControlName="SitePrefeitura">
+            </div>
+            <div class="form-group col-12 col-md-6 custom-file">
+              <input type="file" class="custom-file-input" id="customFile" (change)="UploadImg($event)" formControlName="file">
+              <label class="custom-file-label" for="customFile" id="customFileLabel" >Imagem do imovel</label>
+              <span class="text-primary">{{ProgressoUpload}} <span *ngIf="ProgressoUpload == '100%'">concluído</span></span>
             </div>
             <div formGroupName="Endereco" class="row">
               <p class="text-center">Dados endereço</p>

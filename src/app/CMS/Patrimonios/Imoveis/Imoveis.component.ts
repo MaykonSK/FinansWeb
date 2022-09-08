@@ -7,6 +7,7 @@ import { Imovel } from '../../Models/Imovel';
 import { Usuario } from 'src/app/Autenticacao/Usuario/Usuario';
 import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 import { GetImoveis } from '../../Models/GetImoveis';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-Imoveis',
@@ -19,6 +20,9 @@ export class ImoveisComponent implements OnInit {
   public imovel: Imovel;
   public imoveis: GetImoveis[];
   public infoUsuario: Usuario;
+
+  selectFile: any;
+  ProgressoUpload: string;
 
   cadastro: FormGroup;
 
@@ -40,6 +44,7 @@ export class ImoveisComponent implements OnInit {
       Descricao: [null, Validators.required],
       CodigoIptu: [null],
       SitePrefeitura: [null],
+      file: [null, Validators.required],
       Endereco: this.fb.group({
         Cep: [null, Validators.required],
         Rua: [null, Validators.required],
@@ -62,6 +67,13 @@ export class ImoveisComponent implements OnInit {
       this.imoveis = imoveis;
       console.log(this.imoveis);
     })
+  }
+
+  UploadImg(event: any) {
+    //seleciona os dados do arquivo
+    this.selectFile = <File>event.srcElement.files[0]
+    //seta o nome do arquivo no label
+    document.getElementById('customFileLabel')!.innerHTML = this.selectFile.name
   }
 
   // localizarCep() {
@@ -93,13 +105,35 @@ export class ImoveisComponent implements OnInit {
   cadastrarImovel() {
     if (this.cadastro.valid) {
       this.imovel = this.cadastro.getRawValue(); //getRawValue() recupera todos os dados do formulario cadastro
+      this.imovel.Imagem = this.cadastro.get("file") + this.infoUsuario.Id!.toString();
+      console.log(this.imovel.Imagem);
+
       this.imovel.UsuarioId = this.infoUsuario.Id!;
       console.log(this.imovel);
 
       this.service.cadastrarImovel(this.imovel).subscribe(dados => {
         console.log(dados)
+        this.uploadImagem();
       })
     }
+  }
+
+  uploadImagem() {
+
+      const formData = new FormData;
+      formData.append('file', this.selectFile)
+
+      this.service.uploadFile(formData, this.infoUsuario.Id!).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.ProgressoUpload = (Math.round(event.loaded / event.total * 100) + '%');
+          console.log(this.ProgressoUpload);
+        } else if (event.type === HttpEventType.Response) {
+          console.log(event);
+        }
+      }, error => {
+        console.log(error.error.message);
+      })
+
   }
 
 
