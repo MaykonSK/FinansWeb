@@ -25,8 +25,12 @@ export class CmsService {
     return this.http.get(API+"/imoveis/"+userId);
   }
 
-  cadastrarImovel(imovel: Imovel) {
+  cadastrarImovel(imovel: Imovel): Observable<any> {
     return this.http.post(API+"/imoveis", imovel)
+  }
+
+  deletarImovel(id: number): Observable<any> {
+    return this.http.delete(API+"/imoveis/"+id)
   }
 
   //Contas a pagar
@@ -60,10 +64,23 @@ export class CmsService {
   }
 
   //Upload files
-  uploadFile(file: FormData, userId: number): Observable<any> {
-    return this.http.post(API+"/upload/"+userId, file, {
+  uploadFileImovel(file: FormData): Observable<any> {
+    return this.http.post(API+"/imoveis/UploadImgImovel", file, {
       reportProgress: true,
       observe: 'events'
+    })
+  }
+
+  uploadFileUser(file: FormData): Observable<any> {
+    return this.http.post(API+"/imoveis/UploadImgImovel", file, {
+      reportProgress: true,
+      observe: 'events'
+    })
+  }
+
+  GetImgImovel(userId: number): Observable<any> {
+    return this.http.get(API+"/imoveis/GetImgImovel/"+userId, {
+      responseType: 'text'
     })
   }
 

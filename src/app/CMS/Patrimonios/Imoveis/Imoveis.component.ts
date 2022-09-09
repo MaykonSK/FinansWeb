@@ -8,6 +8,7 @@ import { Usuario } from 'src/app/Autenticacao/Usuario/Usuario';
 import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 import { GetImoveis } from '../../Models/GetImoveis';
 import { HttpEventType } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-Imoveis',
@@ -23,10 +24,11 @@ export class ImoveisComponent implements OnInit {
 
   selectFile: any;
   ProgressoUpload: string;
+  imageUrl: any
 
   cadastro: FormGroup;
 
-  constructor(private service: CmsService, private fb: FormBuilder, private usuario: UsuarioService) {
+  constructor(private service: CmsService, private fb: FormBuilder, private usuario: UsuarioService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -63,9 +65,8 @@ export class ImoveisComponent implements OnInit {
   }
 
   recuperarImoveis(userId: number) {
-    this.service.recuperarImoveis(userId).subscribe(imoveis => {
-      this.imoveis = imoveis;
-      console.log(this.imoveis);
+    this.service.recuperarImoveis(userId).subscribe(x => {
+      this.imoveis = x;
     })
   }
 
@@ -74,6 +75,18 @@ export class ImoveisComponent implements OnInit {
     this.selectFile = <File>event.srcElement.files[0]
     //seta o nome do arquivo no label
     document.getElementById('customFileLabel')!.innerHTML = this.selectFile.name
+  }
+
+  ConverterImagem(img: string) {
+    let objectURL = 'data:image/jpeg;base64,' + img;
+    this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+  }
+
+  deletarImovel(id: number) {
+    this.service.deletarImovel(id).subscribe(x => {
+      console.log(x);
+      this.recuperarImoveis(this.infoUsuario.Id!);
+    })
   }
 
   // localizarCep() {
@@ -105,15 +118,12 @@ export class ImoveisComponent implements OnInit {
   cadastrarImovel() {
     if (this.cadastro.valid) {
       this.imovel = this.cadastro.getRawValue(); //getRawValue() recupera todos os dados do formulario cadastro
-      this.imovel.Imagem = this.cadastro.get("file") + this.infoUsuario.Id!.toString();
-      console.log(this.imovel.Imagem);
-
+      this.imovel.Imagem = this.selectFile.name
       this.imovel.UsuarioId = this.infoUsuario.Id!;
-      console.log(this.imovel);
 
       this.service.cadastrarImovel(this.imovel).subscribe(dados => {
-        console.log(dados)
         this.uploadImagem();
+        this.recuperarImoveis(this.infoUsuario.Id!);
       })
     }
   }
@@ -123,7 +133,7 @@ export class ImoveisComponent implements OnInit {
       const formData = new FormData;
       formData.append('file', this.selectFile)
 
-      this.service.uploadFile(formData, this.infoUsuario.Id!).subscribe(event => {
+      this.service.uploadFileImovel(formData).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.ProgressoUpload = (Math.round(event.loaded / event.total * 100) + '%');
           console.log(this.ProgressoUpload);

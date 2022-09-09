@@ -55,7 +55,7 @@ export class ContaComponent implements OnInit {
       const formData = new FormData;
       formData.append('file', this.selectFile)
 
-      this.service.uploadFile(formData, this.infoUsuario.Id!).subscribe(event => {
+      this.service.uploadFileUser(formData).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.ProgressoUpload = (Math.round(event.loaded / event.total * 100) + '%');
           console.log(this.Loading);
