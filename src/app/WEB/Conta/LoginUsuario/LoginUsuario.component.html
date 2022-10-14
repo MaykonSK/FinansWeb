@@ -19,7 +19,7 @@
         </div>
         <!-- precisa passar nada no recaptcha -->
         <div #divRecaptcha id="recaptcha"></div>
-        <button type="submit" class="btn btn-primary w-100 mt-2">Login</button>
+        <button type="submit" class="btn btn-primary w-100 mt-2" [disabled]="login.invalid">Login</button>
         <app-MsgError [mensagem]="mensagemError"></app-MsgError>
         <app-MsgSuccess [mensagem]="mensagemSuccess"></app-MsgSuccess>
         <p class="mt-2"><a routerLink="/novasenha">Esqueceu a senha senha?</a></p>
