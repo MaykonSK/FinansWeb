@@ -6,18 +6,20 @@
     </div>
     <div class="col-6 centralizar">
       <h1>Login</h1>
-      <form [formGroup]="login">
+      <form #login="ngForm" (ngSubmit)="LogarUsuario()">
         <div class="form-group">
           <label for="exampleInputEmail1">E-mail</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: joao@dominio.com" formControlName="Email">
-          <small class="form-text text-danger" *ngIf="login.get('Email')?.touched && login.get('Email')?.errors">E-mail inválido.</small>
+          <!-- usamos o name="email" e [(ngModel)]="data.email". o #email serve para validar com mensagem -->
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ex: joao@dominio.com" required #email="ngModel" name="email" [(ngModel)]="data.email">
+          <small class="form-text text-danger" *ngIf="email.touched && email.invalid">E-mail inválido.</small>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Senha</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="******" formControlName="Password">
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="******" required name="password" [(ngModel)]="data.password">
         </div>
+        <!-- precisa passar nada no recaptcha -->
         <div #divRecaptcha id="recaptcha"></div>
-        <button type="submit" class="btn btn-primary w-100 mt-2" [disabled]="login.invalid" (click)="LogarUsuario()">Login</button>
+        <button type="submit" class="btn btn-primary w-100 mt-2">Login</button>
         <app-MsgError [mensagem]="mensagemError"></app-MsgError>
         <app-MsgSuccess [mensagem]="mensagemSuccess"></app-MsgSuccess>
         <p class="mt-2"><a routerLink="/novasenha">Esqueceu a senha senha?</a></p>

@@ -1,8 +1,9 @@
 import { Component, ElementRef, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/Autenticacao/token.service';
 import { environment } from 'src/environments/environment';
+import { Login } from '../../Models/login';
 import { WebService } from '../../web.service';
 
 const KeyCaptchaSite = environment.CaptchaKeySite;
@@ -14,13 +15,15 @@ const KeyCaptchaSite = environment.CaptchaKeySite;
 })
 export class LoginUsuarioComponent implements OnInit {
 
+  @ViewChild('login', { read: NgForm }) login!: NgForm; //apenas valida na hora do submit
+  data: Login;
+
   @Output() Loading: boolean = false;
 
   public mensagemError: string = ""
   public mensagemSuccess: string = ""
 
-  @ViewChild('divRecaptcha')
-  divRecaptcha!: ElementRef<HTMLDivElement>;
+  @ViewChild('divRecaptcha') public divRecaptcha!: ElementRef<HTMLDivElement>;
 
   get grecaptcha(): any {
     const w = window as any;
@@ -32,19 +35,21 @@ export class LoginUsuarioComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.login;
+    //this.login;
+    //atribui os campos para o [(ngModel)]
+    this.data = new Login(); //inicializa
   }
 
-  login = this.fb.group({
-    Email: [null, [Validators.required, Validators.email]],
-    Password: [null, Validators.required],
-    recaptcha: [null, Validators.required]
-  })
+  // login = this.fb.group({
+  //   Email: [null, [Validators.required, Validators.email]],
+  //   Password: [null, Validators.required],
+  //   recaptcha: [null, Validators.required]
+  // })
 
   LogarUsuario() {
     if (this.login.valid) {
       this.Loading = true;
-      const dados = this.login.getRawValue();
+      const dados = this.data; //pega direto o valor do data
       console.log(dados);
 
       this.service.logarUsuario(dados).subscribe(token => {
@@ -60,23 +65,9 @@ export class LoginUsuarioComponent implements OnInit {
   }
 
   renderizarReCaptcha() {
-    // *
-    // * Para evitar que change detection seja disparado
-    // * cada vez que o setTimeout for executado,
-    // * executamos essa recorrência fora da zona
-    // * do Angular, por isso o usamos o runOutsideAngular
-    // *
-    // * Para saber mais sobre change detection:
-    // * https://consolelog.com.br/como-funciona-change-detection-angular/
-    // *
+
     this.ngZone.runOutsideAngular(() => {
-      // *
-      // * Se o "grecaptcha" ainda não foi carregado ou
-      // * o elemento <div> onde o reCAPTCHA será
-      // * renderizado ainda não foi construído,
-      // * aguardamos algum tempo e executamos novamente
-      // * este método:
-      // *
+
       if (!this.grecaptcha || !this.divRecaptcha) {
         setTimeout(() => {
           this.renderizarReCaptcha();
@@ -85,21 +76,16 @@ export class LoginUsuarioComponent implements OnInit {
         return;
       }
 
-      // * Se chegou aqui é porque o recaptcha já está
-      // * carregado. Então solicitamos sua renderização
-      // * na tela.
       const idElemento =
         this.divRecaptcha.nativeElement.getAttribute('id');
 
       this.grecaptcha.render(idElemento, {
         sitekey: KeyCaptchaSite,
         callback: (response: any) => {
-          // * Este método é chamado quando o usuário
-          // * resolver o desafio do CAPTCHA
           console.log(response);
 
           this.ngZone.run(() => {
-            this.login.get('recaptcha')?.setValue(response);
+            this.data.recaptcha = response; //passa direto a chave para o data
           });
         },
       });
