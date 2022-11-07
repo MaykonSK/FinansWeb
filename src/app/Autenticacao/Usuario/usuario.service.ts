@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from '../token.service';
 import jwt_decode from 'jwt-decode';
 import { Usuario } from './Usuario';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ private decodificaJWT() {
   this.usuarioSubject.next(usuario);
 }
 
-retornaUsuario() {
+retornaUsuario(): Observable<any> {
   return this.usuarioSubject.asObservable();
 }
 

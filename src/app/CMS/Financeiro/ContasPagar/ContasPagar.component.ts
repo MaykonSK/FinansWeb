@@ -25,7 +25,7 @@ export class ContasPagarComponent implements OnInit {
   //componentes
   @Output() mensagemError: string = "";
   @Output() mensagemSuccess: string = "";
-  @Output() Loading: string | null;
+  @Output() Loading: boolean;
 
   //Formulario reativo
   cadastro: FormGroup;
@@ -118,7 +118,7 @@ export class ContasPagarComponent implements OnInit {
     if (usuarioId != null) {
       this.service.recuperarContasPagar(usuarioId).subscribe((dados: any) => {
         if (dados.type === HttpEventType.UploadProgress) {
-          this.Loading = (Math.round(dados.loaded / dados.total * 100) + '%');
+          //this.Loading = (Math.round(dados.loaded / dados.total * 100) + '%');
         } else if (dados.type === HttpEventType.Response) {
           console.log(dados);
         }

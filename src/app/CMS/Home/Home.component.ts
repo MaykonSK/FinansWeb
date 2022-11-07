@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Usuario } from 'src/app/Autenticacao/Usuario/Usuario';
 import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 
@@ -9,9 +9,12 @@ import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 })
 export class HomeComponent implements OnInit {
 
+  public loading: boolean;
+
   public infoUsuario: Usuario;
 
   constructor(private usuario: UsuarioService) {
+    this.loading = true;
   }
 
   ngOnInit() {
@@ -19,10 +22,12 @@ export class HomeComponent implements OnInit {
   }
 
   recuperarUsuario() {
+
     this.usuario.retornaUsuario().subscribe(user => {
-      console.log(user);
-      this.infoUsuario = user;
-    })
+        this.infoUsuario = user;
+        this.loading = false;
+      })
+
   }
 
 }

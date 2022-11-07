@@ -1,5 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 import { WebService } from '../../web.service';
 
 @Component({
@@ -9,7 +10,15 @@ import { WebService } from '../../web.service';
 })
 export class CadastroUsuarioComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private service: WebService) { }
+  @ViewChild('divRecaptcha')
+  divRecaptcha!: ElementRef<HTMLDivElement>;
+
+  get grecaptcha(): any {
+    const w = window as any;
+    return w['grecaptcha'];
+  }
+
+  constructor(private fb: FormBuilder, private service: WebService, private ngZone: NgZone) { }
 
   @Output() Loading: boolean = false;
 
@@ -17,14 +26,16 @@ export class CadastroUsuarioComponent implements OnInit {
   mensagemSuccess: string = "";
 
   ngOnInit() {
-    this.cadastro
+    this.renderizarReCaptcha();
+    this.cadastro;
   }
 
   cadastro = this.fb.group({
     Name: [null, Validators.required],
     Email: [null, [Validators.required, Validators.email]],
     Password: [null, Validators.required],
-    RePassword: [null, Validators.required]
+    RePassword: [null, Validators.required],
+    recaptcha: [null, Validators.required]
   })
 
   CadastrarUsuario() {
@@ -39,6 +50,53 @@ export class CadastroUsuarioComponent implements OnInit {
         this.Loading = false;
       })
     }
+  }
+
+  renderizarReCaptcha() {
+    // *
+    // * Para evitar que change detection seja disparado
+    // * cada vez que o setTimeout for executado,
+    // * executamos essa recorrência fora da zona
+    // * do Angular, por isso o usamos o runOutsideAngular
+    // *
+    // * Para saber mais sobre change detection:
+    // * https://consolelog.com.br/como-funciona-change-detection-angular/
+    // *
+    this.ngZone.runOutsideAngular(() => {
+      // *
+      // * Se o "grecaptcha" ainda não foi carregado ou
+      // * o elemento <div> onde o reCAPTCHA será
+      // * renderizado ainda não foi construído,
+      // * aguardamos algum tempo e executamos novamente
+      // * este método:
+      // *
+      if (!this.grecaptcha || !this.divRecaptcha) {
+        setTimeout(() => {
+          this.renderizarReCaptcha();
+        }, 500);
+
+        return;
+      }
+
+      // * Se chegou aqui é porque o recaptcha já está
+      // * carregado. Então solicitamos sua renderização
+      // * na tela.
+      const idElemento =
+        this.divRecaptcha.nativeElement.getAttribute('id');
+
+      this.grecaptcha.render(idElemento, {
+        sitekey: environment.CaptchaKeySite,
+        callback: (response: any) => {
+          // * Este método é chamado quando o usuário
+          // * resolver o desafio do CAPTCHA
+          console.log(response);
+
+          this.ngZone.run(() => {
+            this.cadastro.get('recaptcha')?.setValue(response);
+          });
+        },
+      });
+    });
   }
 
 }

@@ -28,6 +28,7 @@
           <input type="password" class="form-control" id="exampleInputPassword2" placeholder="******" formControlName="RePassword">
           <small class="form-text text-danger" *ngIf="cadastro.get('RePassword')?.touched && cadastro.get('RePassword')?.errors">Confirmação de senha necessário</small>
         </div>
+        <div class="mt-2 mb-2" #divRecaptcha id="recaptcha"></div>
         <button (click)="CadastrarUsuario()" class="btn btn-primary w-100" [disabled]="cadastro.invalid">Cadastrar</button>
         <app-MsgError [mensagem]="mensagemError"></app-MsgError>
         <app-MsgSuccess [mensagem]="mensagemSuccess"></app-MsgSuccess>

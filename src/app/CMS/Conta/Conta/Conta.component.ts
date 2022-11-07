@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/Autenticacao/Usuario/usuario.service';
 })
 export class ContaComponent implements OnInit {
 
-  @Output() Loading: string | null;
+  @Output() Loading: boolean;
 
   formulario: FormGroup;
   selectFile: any;
@@ -62,7 +62,7 @@ export class ContaComponent implements OnInit {
         } else if (event.type === HttpEventType.Response) {
           console.log(event);
         }
-        this.Loading = null;
+        this.Loading = false;
       }, error => {
         console.log(error.error.message);
       })
